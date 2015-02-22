@@ -1,0 +1,3620 @@
+#%RAML 0.8
+title: Google Drive API.raml
+version: 2
+baseUri:  https://www.googleapis.com/drive/v2
+securedBy: [oauth_2_0]
+securitySchemes: 
+    - 
+        "oauth_2_0": 
+            description: |
+                Dropbox supports OAuth 2.0 for authenticating all API requests.
+            type: "OAuth 2.0"
+            describedBy: 
+                headers: 
+                    "Authorization": 
+                        description: |
+                            Used to send a valid OAuth 2 access token. Do not use
+                            with the "access_token" query string parameter.
+                        type: string
+                        required: false
+                        repeat: false
+                queryParameters: 
+                    "access_token": 
+                        description: |
+                            Used to send a valid OAuth 2 access token. Do not use together with
+                            the "Authorization" header
+                        type: string
+                        required: false
+                        repeat: false
+                responses: 
+                    "401": 
+                        description: |
+                            Bad or expired token. This can happen if the user or Dropbox
+                            revoked or expired an access token. To fix, you should re-
+                            authenticate the user.
+                    "403": 
+                        description: |
+                            Bad OAuth request (wrong consumer key, bad nonce, expired
+                            imestamp...). Unfortunately, re-authenticating the user won't help here.
+            settings: 
+                authorizationUri: "https://accounts.google.com/o/oauth2/auth"
+                accessTokenUri: "https://www.googleapis.com/oauth2/v3/token"
+                
+schemas: 
+  - 
+    file: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "webContentLink": {
+            "id": "http://jsonschema.net/webContentLink",
+            "type": "string"
+          },
+          "webViewLink": {
+            "id": "http://jsonschema.net/webViewLink",
+            "type": "string"
+          },
+          "alternateLink": {
+            "id": "http://jsonschema.net/alternateLink",
+            "type": "string"
+          },
+          "embedLink": {
+            "id": "http://jsonschema.net/embedLink",
+            "type": "string"
+          },
+          "openWithLinks": {
+            "id": "http://jsonschema.net/openWithLinks",
+            "type": "string"
+          },
+          "defaultOpenWithLink": {
+            "id": "http://jsonschema.net/defaultOpenWithLink",
+            "type": "string"
+          },
+          "iconLink": {
+            "id": "http://jsonschema.net/iconLink",
+            "type": "string"
+          },
+          "thumbnailLink": {
+            "id": "http://jsonschema.net/thumbnailLink",
+            "type": "string"
+          },
+          "thumbnail": {
+            "id": "http://jsonschema.net/thumbnail",
+            "type": "object",
+            "properties": {
+              "image": {
+                "id": "http://jsonschema.net/thumbnail/image",
+                "type": "string"
+              },
+              "mimeType": {
+                "id": "http://jsonschema.net/thumbnail/mimeType",
+                "type": "string"
+              }
+            }
+          },
+          "title": {
+            "id": "http://jsonschema.net/title",
+            "type": "string"
+          },
+          "mimeType": {
+            "id": "http://jsonschema.net/mimeType",
+            "type": "string"
+          },
+          "description": {
+            "id": "http://jsonschema.net/description",
+            "type": "string"
+          },
+          "labels": {
+            "id": "http://jsonschema.net/labels",
+            "type": "object",
+            "properties": {
+              "starred": {
+                "id": "http://jsonschema.net/labels/starred",
+                "type": "string"
+              },
+              "hidden": {
+                "id": "http://jsonschema.net/labels/hidden",
+                "type": "string"
+              },
+              "trashed": {
+                "id": "http://jsonschema.net/labels/trashed",
+                "type": "string"
+              },
+              "restricted": {
+                "id": "http://jsonschema.net/labels/restricted",
+                "type": "string"
+              },
+              "viewed": {
+                "id": "http://jsonschema.net/labels/viewed",
+                "type": "string"
+              }
+            }
+          },
+          "createdDate": {
+            "id": "http://jsonschema.net/createdDate",
+            "type": "string"
+          },
+          "modifiedDate": {
+            "id": "http://jsonschema.net/modifiedDate",
+            "type": "string"
+          },
+          "modifiedByMeDate": {
+            "id": "http://jsonschema.net/modifiedByMeDate",
+            "type": "string"
+          },
+          "lastViewedByMeDate": {
+            "id": "http://jsonschema.net/lastViewedByMeDate",
+            "type": "string"
+          },
+          "markedViewedByMeDate": {
+            "id": "http://jsonschema.net/markedViewedByMeDate",
+            "type": "string"
+          },
+          "sharedWithMeDate": {
+            "id": "http://jsonschema.net/sharedWithMeDate",
+            "type": "string"
+          },
+          "version": {
+            "id": "http://jsonschema.net/version",
+            "type": "string"
+          },
+          "sharingUser": {
+            "id": "http://jsonschema.net/sharingUser",
+            "type": "object",
+            "properties": {
+              "kind": {
+                "id": "http://jsonschema.net/sharingUser/kind",
+                "type": "string"
+              },
+              "displayName": {
+                "id": "http://jsonschema.net/sharingUser/displayName",
+                "type": "string"
+              },
+              "picture": {
+                "id": "http://jsonschema.net/sharingUser/picture",
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "id": "http://jsonschema.net/sharingUser/picture/url",
+                    "type": "string"
+                  }
+                }
+              },
+              "isAuthenticatedUser": {
+                "id": "http://jsonschema.net/sharingUser/isAuthenticatedUser",
+                "type": "string"
+              },
+              "permissionId": {
+                "id": "http://jsonschema.net/sharingUser/permissionId",
+                "type": "string"
+              },
+              "emailAddress": {
+                "id": "http://jsonschema.net/sharingUser/emailAddress",
+                "type": "string"
+              }
+            }
+          },
+          "parents": {
+            "id": "http://jsonschema.net/parents",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/parents/0",
+              "type": "string"
+            }
+          },
+          "downloadUrl": {
+            "id": "http://jsonschema.net/downloadUrl",
+            "type": "string"
+          },
+          "exportLinks": {
+            "id": "http://jsonschema.net/exportLinks",
+            "type": "string"
+          },
+          "indexableText": {
+            "id": "http://jsonschema.net/indexableText",
+            "type": "object",
+            "properties": {
+              "text": {
+                "id": "http://jsonschema.net/indexableText/text",
+                "type": "string"
+              }
+            }
+          },
+          "userPermission": {
+            "id": "http://jsonschema.net/userPermission",
+            "type": "string"
+          },
+          "permissions": {
+            "id": "http://jsonschema.net/permissions",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/permissions/0",
+              "type": "string"
+            }
+          },
+          "originalFilename": {
+            "id": "http://jsonschema.net/originalFilename",
+            "type": "string"
+          },
+          "fileExtension": {
+            "id": "http://jsonschema.net/fileExtension",
+            "type": "string"
+          },
+          "md5Checksum": {
+            "id": "http://jsonschema.net/md5Checksum",
+            "type": "string"
+          },
+          "fileSize": {
+            "id": "http://jsonschema.net/fileSize",
+            "type": "string"
+          },
+          "quotaBytesUsed": {
+            "id": "http://jsonschema.net/quotaBytesUsed",
+            "type": "string"
+          },
+          "ownerNames": {
+            "id": "http://jsonschema.net/ownerNames",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/ownerNames/0",
+              "type": "string"
+            }
+          },
+          "owners": {
+            "id": "http://jsonschema.net/owners",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/owners/0",
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "id": "http://jsonschema.net/owners/0/kind",
+                  "type": "string"
+                },
+                "displayName": {
+                  "id": "http://jsonschema.net/owners/0/displayName",
+                  "type": "string"
+                },
+                "picture": {
+                  "id": "http://jsonschema.net/owners/0/picture",
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "id": "http://jsonschema.net/owners/0/picture/url",
+                      "type": "string"
+                    }
+                  }
+                },
+                "isAuthenticatedUser": {
+                  "id": "http://jsonschema.net/owners/0/isAuthenticatedUser",
+                  "type": "string"
+                },
+                "permissionId": {
+                  "id": "http://jsonschema.net/owners/0/permissionId",
+                  "type": "string"
+                },
+                "emailAddress": {
+                  "id": "http://jsonschema.net/owners/0/emailAddress",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "lastModifyingUserName": {
+            "id": "http://jsonschema.net/lastModifyingUserName",
+            "type": "string"
+          },
+          "lastModifyingUser": {
+            "id": "http://jsonschema.net/lastModifyingUser",
+            "type": "object",
+            "properties": {
+              "kind": {
+                "id": "http://jsonschema.net/lastModifyingUser/kind",
+                "type": "string"
+              },
+              "displayName": {
+                "id": "http://jsonschema.net/lastModifyingUser/displayName",
+                "type": "string"
+              },
+              "picture": {
+                "id": "http://jsonschema.net/lastModifyingUser/picture",
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "id": "http://jsonschema.net/lastModifyingUser/picture/url",
+                    "type": "string"
+                  }
+                }
+              },
+              "isAuthenticatedUser": {
+                "id": "http://jsonschema.net/lastModifyingUser/isAuthenticatedUser",
+                "type": "string"
+              },
+              "permissionId": {
+                "id": "http://jsonschema.net/lastModifyingUser/permissionId",
+                "type": "string"
+              },
+              "emailAddress": {
+                "id": "http://jsonschema.net/lastModifyingUser/emailAddress",
+                "type": "string"
+              }
+            }
+          },
+          "editable": {
+            "id": "http://jsonschema.net/editable",
+            "type": "string"
+          },
+          "copyable": {
+            "id": "http://jsonschema.net/copyable",
+            "type": "string"
+          },
+          "writersCanShare": {
+            "id": "http://jsonschema.net/writersCanShare",
+            "type": "string"
+          },
+          "shared": {
+            "id": "http://jsonschema.net/shared",
+            "type": "string"
+          },
+          "explicitlyTrashed": {
+            "id": "http://jsonschema.net/explicitlyTrashed",
+            "type": "string"
+          },
+          "appDataContents": {
+            "id": "http://jsonschema.net/appDataContents",
+            "type": "string"
+          },
+          "headRevisionId": {
+            "id": "http://jsonschema.net/headRevisionId",
+            "type": "string"
+          },
+          "properties": {
+            "id": "http://jsonschema.net/properties",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/properties/0",
+              "type": "string"
+            }
+          },
+          "folderColorRgb": {
+            "id": "http://jsonschema.net/folderColorRgb",
+            "type": "string"
+          },
+          "imageMediaMetadata": {
+            "id": "http://jsonschema.net/imageMediaMetadata",
+            "type": "object",
+            "properties": {
+              "width": {
+                "id": "http://jsonschema.net/imageMediaMetadata/width",
+                "type": "string"
+              },
+              "height": {
+                "id": "http://jsonschema.net/imageMediaMetadata/height",
+                "type": "string"
+              },
+              "rotation": {
+                "id": "http://jsonschema.net/imageMediaMetadata/rotation",
+                "type": "string"
+              },
+              "location": {
+                "id": "http://jsonschema.net/imageMediaMetadata/location",
+                "type": "object",
+                "properties": {
+                  "latitude": {
+                    "id": "http://jsonschema.net/imageMediaMetadata/location/latitude",
+                    "type": "string"
+                  },
+                  "longitude": {
+                    "id": "http://jsonschema.net/imageMediaMetadata/location/longitude",
+                    "type": "string"
+                  },
+                  "altitude": {
+                    "id": "http://jsonschema.net/imageMediaMetadata/location/altitude",
+                    "type": "string"
+                  }
+                }
+              },
+              "date": {
+                "id": "http://jsonschema.net/imageMediaMetadata/date",
+                "type": "string"
+              },
+              "cameraMake": {
+                "id": "http://jsonschema.net/imageMediaMetadata/cameraMake",
+                "type": "string"
+              },
+              "cameraModel": {
+                "id": "http://jsonschema.net/imageMediaMetadata/cameraModel",
+                "type": "string"
+              },
+              "exposureTime": {
+                "id": "http://jsonschema.net/imageMediaMetadata/exposureTime",
+                "type": "string"
+              },
+              "aperture": {
+                "id": "http://jsonschema.net/imageMediaMetadata/aperture",
+                "type": "string"
+              },
+              "flashUsed": {
+                "id": "http://jsonschema.net/imageMediaMetadata/flashUsed",
+                "type": "string"
+              },
+              "focalLength": {
+                "id": "http://jsonschema.net/imageMediaMetadata/focalLength",
+                "type": "string"
+              },
+              "isoSpeed": {
+                "id": "http://jsonschema.net/imageMediaMetadata/isoSpeed",
+                "type": "string"
+              },
+              "meteringMode": {
+                "id": "http://jsonschema.net/imageMediaMetadata/meteringMode",
+                "type": "string"
+              },
+              "sensor": {
+                "id": "http://jsonschema.net/imageMediaMetadata/sensor",
+                "type": "string"
+              },
+              "exposureMode": {
+                "id": "http://jsonschema.net/imageMediaMetadata/exposureMode",
+                "type": "string"
+              },
+              "colorSpace": {
+                "id": "http://jsonschema.net/imageMediaMetadata/colorSpace",
+                "type": "string"
+              },
+              "whiteBalance": {
+                "id": "http://jsonschema.net/imageMediaMetadata/whiteBalance",
+                "type": "string"
+              },
+              "exposureBias": {
+                "id": "http://jsonschema.net/imageMediaMetadata/exposureBias",
+                "type": "string"
+              },
+              "maxApertureValue": {
+                "id": "http://jsonschema.net/imageMediaMetadata/maxApertureValue",
+                "type": "string"
+              },
+              "subjectDistance": {
+                "id": "http://jsonschema.net/imageMediaMetadata/subjectDistance",
+                "type": "string"
+              },
+              "lens": {
+                "id": "http://jsonschema.net/imageMediaMetadata/lens",
+                "type": "string"
+              }
+            }
+          },
+          "videoMediaMetadata": {
+            "id": "http://jsonschema.net/videoMediaMetadata",
+            "type": "object",
+            "properties": {
+              "width": {
+                "id": "http://jsonschema.net/videoMediaMetadata/width",
+                "type": "string"
+              },
+              "height": {
+                "id": "http://jsonschema.net/videoMediaMetadata/height",
+                "type": "string"
+              },
+              "durationMillis": {
+                "id": "http://jsonschema.net/videoMediaMetadata/durationMillis",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "id",
+          "etag",
+          "selfLink",
+          "webContentLink",
+          "webViewLink",
+          "alternateLink",
+          "embedLink",
+          "openWithLinks",
+          "defaultOpenWithLink",
+          "iconLink",
+          "thumbnailLink",
+          "thumbnail",
+          "title",
+          "mimeType",
+          "description",
+          "labels",
+          "createdDate",
+          "modifiedDate",
+          "modifiedByMeDate",
+          "lastViewedByMeDate",
+          "markedViewedByMeDate",
+          "sharedWithMeDate",
+          "version",
+          "sharingUser",
+          "parents",
+          "downloadUrl",
+          "exportLinks",
+          "indexableText",
+          "userPermission",
+          "permissions",
+          "originalFilename",
+          "fileExtension",
+          "md5Checksum",
+          "fileSize",
+          "quotaBytesUsed",
+          "ownerNames",
+          "owners",
+          "lastModifyingUserName",
+          "lastModifyingUser",
+          "editable",
+          "copyable",
+          "writersCanShare",
+          "shared",
+          "explicitlyTrashed",
+          "appDataContents",
+          "headRevisionId",
+          "properties",
+          "folderColorRgb",
+          "imageMediaMetadata",
+          "videoMediaMetadata"
+        ]
+      }
+  -
+    listfiles: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "nextPageToken": {
+            "id": "http://jsonschema.net/nextPageToken",
+            "type": "string"
+          },
+          "nextLink": {
+            "id": "http://jsonschema.net/nextLink",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "file"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "nextPageToken",
+          "nextLink",
+          "items"
+        ]
+      }
+  -
+    watch: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "expiration": {
+            "id": "http://jsonschema.net/expiration",
+            "type": "string"
+          },
+          "token": {
+            "id": "http://jsonschema.net/token",
+            "type": "string"
+          },
+          "type": {
+            "id": "http://jsonschema.net/type",
+            "type": "string"
+          },
+          "address": {
+            "id": "http://jsonschema.net/address",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "expiration",
+          "token",
+          "type",
+          "address"
+        ]
+      }
+  -
+    watchResponse: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "resourceId": {
+            "id": "http://jsonschema.net/resourceId",
+            "type": "string"
+          },
+          "resourceUri": {
+            "id": "http://jsonschema.net/resourceUri",
+            "type": "string"
+          },
+          "token": {
+            "id": "http://jsonschema.net/token",
+            "type": "string"
+          },
+          "expiration": {
+            "id": "http://jsonschema.net/expiration",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "kind",
+          "id",
+          "resourceId",
+          "resourceUri",
+          "token",
+          "expiration"
+        ]
+      }
+  -
+    aboutResponse: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "name": {
+            "id": "http://jsonschema.net/name",
+            "type": "string"
+          },
+          "user": {
+            "id": "http://jsonschema.net/user",
+            "type": "object",
+            "properties": {
+              "kind": {
+                "id": "http://jsonschema.net/user/kind",
+                "type": "string"
+              },
+              "displayName": {
+                "id": "http://jsonschema.net/user/displayName",
+                "type": "string"
+              },
+              "picture": {
+                "id": "http://jsonschema.net/user/picture",
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "id": "http://jsonschema.net/user/picture/url",
+                    "type": "string"
+                  }
+                }
+              },
+              "isAuthenticatedUser": {
+                "id": "http://jsonschema.net/user/isAuthenticatedUser",
+                "type": "string"
+              },
+              "permissionId": {
+                "id": "http://jsonschema.net/user/permissionId",
+                "type": "string"
+              },
+              "emailAddress": {
+                "id": "http://jsonschema.net/user/emailAddress",
+                "type": "string"
+              }
+            }
+          },
+          "quotaBytesTotal": {
+            "id": "http://jsonschema.net/quotaBytesTotal",
+            "type": "string"
+          },
+          "quotaBytesUsed": {
+            "id": "http://jsonschema.net/quotaBytesUsed",
+            "type": "string"
+          },
+          "quotaBytesUsedAggregate": {
+            "id": "http://jsonschema.net/quotaBytesUsedAggregate",
+            "type": "string"
+          },
+          "quotaBytesUsedInTrash": {
+            "id": "http://jsonschema.net/quotaBytesUsedInTrash",
+            "type": "string"
+          },
+          "quotaType": {
+            "id": "http://jsonschema.net/quotaType",
+            "type": "string"
+          },
+          "quotaBytesByService": {
+            "id": "http://jsonschema.net/quotaBytesByService",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/quotaBytesByService/0",
+              "type": "object",
+              "properties": {
+                "serviceName": {
+                  "id": "http://jsonschema.net/quotaBytesByService/0/serviceName",
+                  "type": "string"
+                },
+                "bytesUsed": {
+                  "id": "http://jsonschema.net/quotaBytesByService/0/bytesUsed",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "largestChangeId": {
+            "id": "http://jsonschema.net/largestChangeId",
+            "type": "string"
+          },
+          "remainingChangeIds": {
+            "id": "http://jsonschema.net/remainingChangeIds",
+            "type": "string"
+          },
+          "rootFolderId": {
+            "id": "http://jsonschema.net/rootFolderId",
+            "type": "string"
+          },
+          "domainSharingPolicy": {
+            "id": "http://jsonschema.net/domainSharingPolicy",
+            "type": "string"
+          },
+          "permissionId": {
+            "id": "http://jsonschema.net/permissionId",
+            "type": "string"
+          },
+          "importFormats": {
+            "id": "http://jsonschema.net/importFormats",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/importFormats/0",
+              "type": "object",
+              "properties": {
+                "source": {
+                  "id": "http://jsonschema.net/importFormats/0/source",
+                  "type": "string"
+                },
+                "targets": {
+                  "id": "http://jsonschema.net/importFormats/0/targets",
+                  "type": "array",
+                  "items": {
+                    "id": "http://jsonschema.net/importFormats/0/targets/0",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "exportFormats": {
+            "id": "http://jsonschema.net/exportFormats",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/exportFormats/0",
+              "type": "object",
+              "properties": {
+                "source": {
+                  "id": "http://jsonschema.net/exportFormats/0/source",
+                  "type": "string"
+                },
+                "targets": {
+                  "id": "http://jsonschema.net/exportFormats/0/targets",
+                  "type": "array",
+                  "items": {
+                    "id": "http://jsonschema.net/exportFormats/0/targets/0",
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "additionalRoleInfo": {
+            "id": "http://jsonschema.net/additionalRoleInfo",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/additionalRoleInfo/0",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "id": "http://jsonschema.net/additionalRoleInfo/0/type",
+                  "type": "string"
+                },
+                "roleSets": {
+                  "id": "http://jsonschema.net/additionalRoleInfo/0/roleSets",
+                  "type": "array",
+                  "items": {
+                    "id": "http://jsonschema.net/additionalRoleInfo/0/roleSets/0",
+                    "type": "object",
+                    "properties": {
+                      "primaryRole": {
+                        "id": "http://jsonschema.net/additionalRoleInfo/0/roleSets/0/primaryRole",
+                        "type": "string"
+                      },
+                      "additionalRoles": {
+                        "id": "http://jsonschema.net/additionalRoleInfo/0/roleSets/0/additionalRoles",
+                        "type": "array",
+                        "items": {
+                          "id": "http://jsonschema.net/additionalRoleInfo/0/roleSets/0/additionalRoles/0",
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "features": {
+            "id": "http://jsonschema.net/features",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/features/0",
+              "type": "object",
+              "properties": {
+                "featureName": {
+                  "id": "http://jsonschema.net/features/0/featureName",
+                  "type": "string"
+                },
+                "featureRate": {
+                  "id": "http://jsonschema.net/features/0/featureRate",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "maxUploadSizes": {
+            "id": "http://jsonschema.net/maxUploadSizes",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/maxUploadSizes/0",
+              "type": "object",
+              "properties": {
+                "type": {
+                  "id": "http://jsonschema.net/maxUploadSizes/0/type",
+                  "type": "string"
+                },
+                "size": {
+                  "id": "http://jsonschema.net/maxUploadSizes/0/size",
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "isCurrentAppInstalled": {
+            "id": "http://jsonschema.net/isCurrentAppInstalled",
+            "type": "string"
+          },
+          "languageCode": {
+            "id": "http://jsonschema.net/languageCode",
+            "type": "string"
+          },
+          "folderColorPalette": {
+            "id": "http://jsonschema.net/folderColorPalette",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/folderColorPalette/0",
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "name",
+          "user",
+          "quotaBytesTotal",
+          "quotaBytesUsed",
+          "quotaBytesUsedAggregate",
+          "quotaBytesUsedInTrash",
+          "quotaType",
+          "quotaBytesByService",
+          "largestChangeId",
+          "remainingChangeIds",
+          "rootFolderId",
+          "domainSharingPolicy",
+          "permissionId",
+          "importFormats",
+          "exportFormats",
+          "additionalRoleInfo",
+          "features",
+          "maxUploadSizes",
+          "isCurrentAppInstalled",
+          "languageCode",
+          "folderColorPalette"
+        ]
+      }
+  -
+    changeResponse: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "fileId": {
+            "id": "http://jsonschema.net/fileId",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "deleted": {
+            "id": "http://jsonschema.net/deleted",
+            "type": "string"
+          },
+          "modificationDate": {
+            "id": "http://jsonschema.net/modificationDate",
+            "type": "string"
+          },
+          "file": {
+            "id": "http://jsonschema.net/file",
+            "type": "file"
+          }
+        },
+        "required": [
+          "kind",
+          "id",
+          "fileId",
+          "selfLink",
+          "deleted",
+          "modificationDate",
+          "file"
+        ]
+      }
+  -
+    listResponse: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "nextPageToken": {
+            "id": "http://jsonschema.net/nextPageToken",
+            "type": "string"
+          },
+          "nextLink": {
+            "id": "http://jsonschema.net/nextLink",
+            "type": "string"
+          },
+          "largestChangeId": {
+            "id": "http://jsonschema.net/largestChangeId",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "changeResponse"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "nextPageToken",
+          "nextLink",
+          "largestChangeId",
+          "items"
+        ]
+      }
+  -
+    children: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "childLink": {
+            "id": "http://jsonschema.net/childLink",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "id",
+          "selfLink",
+          "childLink"
+        ]
+      }
+  -
+    listChildren: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "nextPageToken": {
+            "id": "http://jsonschema.net/nextPageToken",
+            "type": "string"
+          },
+          "nextLink": {
+            "id": "http://jsonschema.net/nextLink",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "children"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "nextPageToken",
+          "nextLink",
+          "items"
+        ]
+      }
+  -
+    parent: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "parentLink": {
+            "id": "http://jsonschema.net/parentLink",
+            "type": "string"
+          },
+          "isRoot": {
+            "id": "http://jsonschema.net/isRoot",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "id",
+          "selfLink",
+          "parentLink",
+          "isRoot"
+        ]
+      }
+  -
+    listParents: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "parent"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "items"
+        ]
+      }
+  -
+    permissions: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "name": {
+            "id": "http://jsonschema.net/name",
+            "type": "string"
+          },
+          "emailAddress": {
+            "id": "http://jsonschema.net/emailAddress",
+            "type": "string"
+          },
+          "domain": {
+            "id": "http://jsonschema.net/domain",
+            "type": "string"
+          },
+          "role": {
+            "id": "http://jsonschema.net/role",
+            "type": "string"
+          },
+          "additionalRoles": {
+            "id": "http://jsonschema.net/additionalRoles",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/additionalRoles/0",
+              "type": "string"
+            }
+          },
+          "type": {
+            "id": "http://jsonschema.net/type",
+            "type": "string"
+          },
+          "value": {
+            "id": "http://jsonschema.net/value",
+            "type": "string"
+          },
+          "authKey": {
+            "id": "http://jsonschema.net/authKey",
+            "type": "string"
+          },
+          "withLink": {
+            "id": "http://jsonschema.net/withLink",
+            "type": "string"
+          },
+          "photoLink": {
+            "id": "http://jsonschema.net/photoLink",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "id",
+          "selfLink",
+          "name",
+          "emailAddress",
+          "domain",
+          "role",
+          "additionalRoles",
+          "type",
+          "value",
+          "authKey",
+          "withLink",
+          "photoLink"
+        ]
+      }
+  -
+    listPermisions: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "permissions"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "items"
+        ]
+      }
+  -
+    permissionId: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "id"
+        ]
+      }
+  -
+    revision: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "mimeType": {
+            "id": "http://jsonschema.net/mimeType",
+            "type": "string"
+          },
+          "modifiedDate": {
+            "id": "http://jsonschema.net/modifiedDate",
+            "type": "string"
+          },
+          "pinned": {
+            "id": "http://jsonschema.net/pinned",
+            "type": "string"
+          },
+          "published": {
+            "id": "http://jsonschema.net/published",
+            "type": "string"
+          },
+          "publishedLink": {
+            "id": "http://jsonschema.net/publishedLink",
+            "type": "string"
+          },
+          "publishAuto": {
+            "id": "http://jsonschema.net/publishAuto",
+            "type": "string"
+          },
+          "publishedOutsideDomain": {
+            "id": "http://jsonschema.net/publishedOutsideDomain",
+            "type": "string"
+          },
+          "downloadUrl": {
+            "id": "http://jsonschema.net/downloadUrl",
+            "type": "string"
+          },
+          "exportLinks": {
+            "id": "http://jsonschema.net/exportLinks",
+            "type": "string"
+          },
+          "lastModifyingUserName": {
+            "id": "http://jsonschema.net/lastModifyingUserName",
+            "type": "string"
+          },
+          "lastModifyingUser": {
+            "id": "http://jsonschema.net/lastModifyingUser",
+            "type": "object",
+            "properties": {
+              "kind": {
+                "id": "http://jsonschema.net/lastModifyingUser/kind",
+                "type": "string"
+              },
+              "displayName": {
+                "id": "http://jsonschema.net/lastModifyingUser/displayName",
+                "type": "string"
+              },
+              "picture": {
+                "id": "http://jsonschema.net/lastModifyingUser/picture",
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "id": "http://jsonschema.net/lastModifyingUser/picture/url",
+                    "type": "string"
+                  }
+                }
+              },
+              "isAuthenticatedUser": {
+                "id": "http://jsonschema.net/lastModifyingUser/isAuthenticatedUser",
+                "type": "string"
+              },
+              "permissionId": {
+                "id": "http://jsonschema.net/lastModifyingUser/permissionId",
+                "type": "string"
+              },
+              "emailAddress": {
+                "id": "http://jsonschema.net/lastModifyingUser/emailAddress",
+                "type": "string"
+              }
+            }
+          },
+          "originalFilename": {
+            "id": "http://jsonschema.net/originalFilename",
+            "type": "string"
+          },
+          "md5Checksum": {
+            "id": "http://jsonschema.net/md5Checksum",
+            "type": "string"
+          },
+          "fileSize": {
+            "id": "http://jsonschema.net/fileSize",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "id",
+          "selfLink",
+          "mimeType",
+          "modifiedDate",
+          "pinned",
+          "published",
+          "publishedLink",
+          "publishAuto",
+          "publishedOutsideDomain",
+          "downloadUrl",
+          "exportLinks",
+          "lastModifyingUserName",
+          "lastModifyingUser",
+          "originalFilename",
+          "md5Checksum",
+          "fileSize"
+        ]
+      }
+  -
+    listRevisons: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "revision"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "items"
+        ]
+      }
+  -
+    apps: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "name": {
+            "id": "http://jsonschema.net/name",
+            "type": "string"
+          },
+          "objectType": {
+            "id": "http://jsonschema.net/objectType",
+            "type": "string"
+          },
+          "shortDescription": {
+            "id": "http://jsonschema.net/shortDescription",
+            "type": "string"
+          },
+          "longDescription": {
+            "id": "http://jsonschema.net/longDescription",
+            "type": "string"
+          },
+          "supportsCreate": {
+            "id": "http://jsonschema.net/supportsCreate",
+            "type": "string"
+          },
+          "supportsImport": {
+            "id": "http://jsonschema.net/supportsImport",
+            "type": "string"
+          },
+          "supportsMultiOpen": {
+            "id": "http://jsonschema.net/supportsMultiOpen",
+            "type": "string"
+          },
+          "supportsOfflineCreate": {
+            "id": "http://jsonschema.net/supportsOfflineCreate",
+            "type": "string"
+          },
+          "installed": {
+            "id": "http://jsonschema.net/installed",
+            "type": "string"
+          },
+          "authorized": {
+            "id": "http://jsonschema.net/authorized",
+            "type": "string"
+          },
+          "hasDriveWideScope": {
+            "id": "http://jsonschema.net/hasDriveWideScope",
+            "type": "string"
+          },
+          "useByDefault": {
+            "id": "http://jsonschema.net/useByDefault",
+            "type": "string"
+          },
+          "productUrl": {
+            "id": "http://jsonschema.net/productUrl",
+            "type": "string"
+          },
+          "productId": {
+            "id": "http://jsonschema.net/productId",
+            "type": "string"
+          },
+          "openUrlTemplate": {
+            "id": "http://jsonschema.net/openUrlTemplate",
+            "type": "string"
+          },
+          "createUrl": {
+            "id": "http://jsonschema.net/createUrl",
+            "type": "string"
+          },
+          "createInFolderTemplate": {
+            "id": "http://jsonschema.net/createInFolderTemplate",
+            "type": "string"
+          },
+          "primaryMimeTypes": {
+            "id": "http://jsonschema.net/primaryMimeTypes",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/primaryMimeTypes/0",
+              "type": "string"
+            }
+          },
+          "secondaryMimeTypes": {
+            "id": "http://jsonschema.net/secondaryMimeTypes",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/secondaryMimeTypes/0",
+              "type": "string"
+            }
+          },
+          "primaryFileExtensions": {
+            "id": "http://jsonschema.net/primaryFileExtensions",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/primaryFileExtensions/0",
+              "type": "string"
+            }
+          },
+          "secondaryFileExtensions": {
+            "id": "http://jsonschema.net/secondaryFileExtensions",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/secondaryFileExtensions/0",
+              "type": "string"
+            }
+          },
+          "icons": {
+            "id": "http://jsonschema.net/icons",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/icons/0",
+              "type": "object",
+              "properties": {
+                "category": {
+                  "id": "http://jsonschema.net/icons/0/category",
+                  "type": "string"
+                },
+                "size": {
+                  "id": "http://jsonschema.net/icons/0/size",
+                  "type": "string"
+                },
+                "iconUrl": {
+                  "id": "http://jsonschema.net/icons/0/iconUrl",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "id",
+          "name",
+          "objectType",
+          "shortDescription",
+          "longDescription",
+          "supportsCreate",
+          "supportsImport",
+          "supportsMultiOpen",
+          "supportsOfflineCreate",
+          "installed",
+          "authorized",
+          "hasDriveWideScope",
+          "useByDefault",
+          "productUrl",
+          "productId",
+          "openUrlTemplate",
+          "createUrl",
+          "createInFolderTemplate",
+          "primaryMimeTypes",
+          "secondaryMimeTypes",
+          "primaryFileExtensions",
+          "secondaryFileExtensions",
+          "icons"
+        ]
+      }
+  -
+    listApps: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "string"
+            }
+          },
+          "defaultAppIds": {
+            "id": "http://jsonschema.net/defaultAppIds",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/defaultAppIds/0",
+              "type": "apps"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "items",
+          "defaultAppIds"
+        ]
+      }
+  -
+    comment: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "commentId": {
+            "id": "http://jsonschema.net/commentId",
+            "type": "string"
+          },
+          "createdDate": {
+            "id": "http://jsonschema.net/createdDate",
+            "type": "string"
+          },
+          "modifiedDate": {
+            "id": "http://jsonschema.net/modifiedDate",
+            "type": "string"
+          },
+          "author": {
+            "id": "http://jsonschema.net/author",
+            "type": "object",
+            "properties": {
+              "kind": {
+                "id": "http://jsonschema.net/author/kind",
+                "type": "string"
+              },
+              "displayName": {
+                "id": "http://jsonschema.net/author/displayName",
+                "type": "string"
+              },
+              "picture": {
+                "id": "http://jsonschema.net/author/picture",
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "id": "http://jsonschema.net/author/picture/url",
+                    "type": "string"
+                  }
+                }
+              },
+              "isAuthenticatedUser": {
+                "id": "http://jsonschema.net/author/isAuthenticatedUser",
+                "type": "string"
+              },
+              "permissionId": {
+                "id": "http://jsonschema.net/author/permissionId",
+                "type": "string"
+              },
+              "emailAddress": {
+                "id": "http://jsonschema.net/author/emailAddress",
+                "type": "string"
+              }
+            }
+          },
+          "htmlContent": {
+            "id": "http://jsonschema.net/htmlContent",
+            "type": "string"
+          },
+          "content": {
+            "id": "http://jsonschema.net/content",
+            "type": "string"
+          },
+          "deleted": {
+            "id": "http://jsonschema.net/deleted",
+            "type": "string"
+          },
+          "status": {
+            "id": "http://jsonschema.net/status",
+            "type": "string"
+          },
+          "context": {
+            "id": "http://jsonschema.net/context",
+            "type": "object",
+            "properties": {
+              "type": {
+                "id": "http://jsonschema.net/context/type",
+                "type": "string"
+              },
+              "value": {
+                "id": "http://jsonschema.net/context/value",
+                "type": "string"
+              }
+            }
+          },
+          "anchor": {
+            "id": "http://jsonschema.net/anchor",
+            "type": "string"
+          },
+          "fileId": {
+            "id": "http://jsonschema.net/fileId",
+            "type": "string"
+          },
+          "fileTitle": {
+            "id": "http://jsonschema.net/fileTitle",
+            "type": "string"
+          },
+          "replies": {
+            "id": "http://jsonschema.net/replies",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/replies/0",
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "selfLink",
+          "commentId",
+          "createdDate",
+          "modifiedDate",
+          "author",
+          "htmlContent",
+          "content",
+          "deleted",
+          "status",
+          "context",
+          "anchor",
+          "fileId",
+          "fileTitle",
+          "replies"
+        ]
+      }
+  -
+    listComments: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "nextPageToken": {
+            "id": "http://jsonschema.net/nextPageToken",
+            "type": "string"
+          },
+          "nextLink": {
+            "id": "http://jsonschema.net/nextLink",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "comment"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "selfLink",
+          "nextPageToken",
+          "nextLink",
+          "items"
+        ]
+      }
+  -  
+    replies: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "replyId": {
+            "id": "http://jsonschema.net/replyId",
+            "type": "string"
+          },
+          "createdDate": {
+            "id": "http://jsonschema.net/createdDate",
+            "type": "string"
+          },
+          "modifiedDate": {
+            "id": "http://jsonschema.net/modifiedDate",
+            "type": "string"
+          },
+          "author": {
+            "id": "http://jsonschema.net/author",
+            "type": "object",
+            "properties": {
+              "kind": {
+                "id": "http://jsonschema.net/author/kind",
+                "type": "string"
+              },
+              "displayName": {
+                "id": "http://jsonschema.net/author/displayName",
+                "type": "string"
+              },
+              "picture": {
+                "id": "http://jsonschema.net/author/picture",
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "id": "http://jsonschema.net/author/picture/url",
+                    "type": "string"
+                  }
+                }
+              },
+              "isAuthenticatedUser": {
+                "id": "http://jsonschema.net/author/isAuthenticatedUser",
+                "type": "string"
+              },
+              "permissionId": {
+                "id": "http://jsonschema.net/author/permissionId",
+                "type": "string"
+              },
+              "emailAddress": {
+                "id": "http://jsonschema.net/author/emailAddress",
+                "type": "string"
+              }
+            }
+          },
+          "htmlContent": {
+            "id": "http://jsonschema.net/htmlContent",
+            "type": "string"
+          },
+          "content": {
+            "id": "http://jsonschema.net/content",
+            "type": "string"
+          },
+          "deleted": {
+            "id": "http://jsonschema.net/deleted",
+            "type": "string"
+          },
+          "verb": {
+            "id": "http://jsonschema.net/verb",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "replyId",
+          "createdDate",
+          "modifiedDate",
+          "author",
+          "htmlContent",
+          "content",
+          "deleted",
+          "verb"
+        ]
+      }
+  -
+    listReplies: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "nextPageToken": {
+            "id": "http://jsonschema.net/nextPageToken",
+            "type": "string"
+          },
+          "nextLink": {
+            "id": "http://jsonschema.net/nextLink",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "replies"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "selfLink",
+          "nextPageToken",
+          "nextLink",
+          "items"
+        ]
+      }
+  -
+    properties: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "key": {
+            "id": "http://jsonschema.net/key",
+            "type": "string"
+          },
+          "visibility": {
+            "id": "http://jsonschema.net/visibility",
+            "type": "string"
+          },
+          "value": {
+            "id": "http://jsonschema.net/value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "key",
+          "visibility",
+          "value"
+        ]
+      }
+  -
+    listProperties: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "kind": {
+            "id": "http://jsonschema.net/kind",
+            "type": "string"
+          },
+          "etag": {
+            "id": "http://jsonschema.net/etag",
+            "type": "string"
+          },
+          "selfLink": {
+            "id": "http://jsonschema.net/selfLink",
+            "type": "string"
+          },
+          "items": {
+            "id": "http://jsonschema.net/items",
+            "type": "array",
+            "items": {
+              "id": "http://jsonschema.net/items/0",
+              "type": "properties"
+            }
+          }
+        },
+        "required": [
+          "kind",
+          "etag",
+          "selfLink",
+          "items"
+        ]
+      }
+  -
+    stopRequest: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "id": {
+            "id": "http://jsonschema.net/id",
+            "type": "string"
+          },
+          "resourceId": {
+            "id": "http://jsonschema.net/resourceId",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "resourceId"
+        ]
+      }
+/files:
+  get:
+      description: <<Lists the user's files.
+        Requests with files.list accept the q parameter, which is a search query combining one or more search terms. For more information, see Search for files.
+        Note:- This method returns all files by default. This includes files with trashed=true in the results. Use the trashed=false query parameter to filter these from the results.
+        Authorization 
+        This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+        Scope:- |
+        https://www.googleapis.com/auth/drive
+        https://www.googleapis.com/auth/drive.file
+        https://www.googleapis.com/auth/drive.readonly
+        https://www.googleapis.com/auth/drive.metadata.readonly
+        https://www.googleapis.com/auth/drive.appdata
+        https://www.googleapis.com/auth/drive.apps.readonly
+        >>
+      queryParameters: 
+        "corpus": 
+          description: The body of items (files/documents) to which the query applies. 
+            Acceptable values are:-
+              "DEFAULT":- The items that the user has accessed.
+              "DOMAIN":- Items shared to the user's domain.
+          type: string
+          required: false
+        "maxResults": 
+          description: Maximum number of files to return. Acceptable values are 0 to 1000, inclusive. (Default:- 100)
+          type: integer
+          required: false
+        "pageToken": 
+          description: Page token for files.
+          type: string
+          required: false
+        "projection": 
+          description: this parameter is deprecated and has no function. 
+            Acceptable values are:-
+              "BASIC":- Deprecated
+              "FULL":- Deprecated
+          type: string
+          required: false
+        "q": 
+          description: Query string for searching files. See https://developers.google.com/drive/search-parameters for more information about supported fields and operations
+            Acceptable values are:-
+              "BASIC":- Deprecated
+              "FULL":- Deprecated
+          type: string
+          required: false
+      responses: 
+        "200": 
+          body: 
+            "application/json": 
+                schema: "listFiles"
+  post:
+      description: <<Insert a new file. Subsequent GET requests include the read-only fileExtension property populated with the extension originally specified in the title property. When a Google Drive user requests to download a file, or when the file is downloaded through the sync client, Drive builds a full filename (with extension) based on the title. In cases where the extension is missing, Google Drive attempts to determine the extension based on the file's MIME type.
+       Authorization 
+        This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+        Scope:- |
+        https://www.googleapis.com/auth/drive
+        https://www.googleapis.com/auth/drive.file
+        https://www.googleapis.com/auth/drive.appdata
+        https://www.googleapis.com/auth/drive.apps.readonly
+        
+        Body:-
+        supply a Files resource with the following properties as the metadata. For more information, see the document on https://developers.google.com/drive/manage-uploads
+          description:- string,  A short description of the file.
+          folderColorRgb:- string,  Folder color as an RGB hex string if the file is a folder. The list of supported colors is available in the folderColorPalette field of the About resource. If an unsupported color is specified, it will be changed to the closest color in the palette.
+          indexableText.text:- string, The text to be indexed for this file.
+          labels.hidden:- boolean, Deprecated.
+          labels.restricted:- boolean, Whether viewers are prevented from downloading this file.
+          labels.starred:- boolean, Whether this file is starred by the user.
+          labels.trashed:- boolean, Whether this file has been trashed.
+          labels.viewed:- boolean, Whether this file has been viewed by this user.
+          lastViewedByMeDate:-datetime, Last time this file was viewed by the user (formatted RFC 3339 timestamp).
+          markedViewedByMeDate:- datetime, Time this file was explicitly marked viewed by the user (formatted RFC 3339 timestamp).
+          mimeType:- string, The MIME type of the file. This is only mutable on update when uploading new content. This field can be left blank, and the mimetype will be determined from the uploaded content's MIME type.
+          modifiedDate:- datetime, Last time this file was modified by anyone (formatted RFC 3339 timestamp). This is only mutable on update when the setModifiedDate parameter is set.
+          parents[]:- list, Collection of parent folders which contain this file.
+          Setting this field will put the file in all of the provided folders. On insert, if no folders are provided, the file will be placed in the default root folder.
+          properties[]:- list, The list of properties.
+          title:- string, The title of the file. Used to identify file or folder name.
+          writersCanShare:- boolean, Whether writers can share the document with other users.
+          >>
+      queryParameters: 
+        "uploadType": 
+          description: The type of upload request to the /upload URI. Acceptable values are:- |
+            media - Simple upload. Upload the media only, without any metadata.
+            multipart - Multipart upload. Upload both the media and its metadata, in a single request.
+            resumable - Resumable upload. Upload the file in a resumable fashion, using a series of at least two requests where the first request includes the metadata.
+          type: string
+          required: true
+        "convert": 
+          description: Whether to convert this file to the corresponding Google Docs format. (Default:- false)
+          type: boolean
+          required: false
+        "ocr": 
+          description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads. (Default:- false)
+          type: boolean
+          required: false
+        "ocrLanguage": 
+          description: If ocr is true, hints at the language to use. Valid values are ISO 639-1 codes.
+          type: string
+          required: false
+        "pinned": 
+          description: Whether to pin the head revision of the uploaded file. A file can have a maximum of 200 pinned revisions. (Default:- false)
+          type: boolean
+          required: false
+        "timedTextLanguage": 
+          description: The language of the timed text.
+          type: string
+          required: false
+        "timedTextTrackName": 
+          description: The timed text track name.
+          type: string
+          required: false
+        "useContentAsIndexableText": 
+          description: Whether to use the content as indexable text. (Default:- false)
+          type: boolean
+          required: false
+        "visibility": 
+          description: The visibility of the new file. This parameter is only relevant when convert=false. | 
+            Acceptable values are:-
+              "DEFAULT":- The visibility of the new file is determined by the user's default visibility/sharing policies. (default)
+              "PRIVATE":- The new file will be visible to only the owner.
+          type: string
+          required: false
+      body:
+        "application/json": 
+          schema: "file"
+      responses: 
+        "200": 
+          body: 
+            "application/json": 
+              schema: "file"
+  /{fileId}:
+    uriParameters: 
+      "fileId": 
+        displayName: "fileId"
+        description: The ID of the file.
+        type: string
+        required: true
+        repeat: false
+    get:
+      description: <<Gets a file's metadata by ID>>
+      responses: 
+        "200": 
+          body: 
+            "application/json": 
+              schema: "file"
+    patch:
+      description: <<Updates file metadata. This method supports patch semantics.
+       Authorization 
+        This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+        Scope:- |
+        https://www.googleapis.com/auth/drive
+        https://www.googleapis.com/auth/drive.file
+        https://www.googleapis.com/auth/drive.appdata
+        https://www.googleapis.com/auth/drive.scripts
+        https://www.googleapis.com/auth/drive.apps.readonly
+        
+        Body:-
+        In the request body, supply the relevant portions of a Files resource, according to the rules of patch semantics. For more information, see the document on https://developers.google.com/drive/manage-uploads>>
+      queryParameters: 
+        "addParents": 
+          description: Comma-separated list of parent IDs to add.
+          type: string
+          required: false
+        "convert": 
+          description: Whether to convert this file to the corresponding Google Docs format. (Default:- false)
+          type: boolean
+          required: false
+        "newRevision": 
+          description: Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous revisions are preserved (causing increased use of the user's data storage quota). (Default:- true)
+          type: boolean
+          required: false
+        "ocr": 
+          description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads. (Default:- false)
+          type: boolean
+          required: false
+        "ocrLanguage": 
+          description: If ocr is true, hints at the language to use. Valid values are ISO 639-1 codes.
+          type: string
+          required: false
+        "pinned": 
+          description: Whether to pin the head revision of the uploaded file. A file can have a maximum of 200 pinned revisions. (Default:- false)
+          type: boolean
+          required: false
+        "removeParents": 
+          description: Comma-separated list of parent IDs to remove.
+          type: string
+          required: false
+        "setModifiedDate": 
+          description: Whether to set the modified date with the supplied modified date. (Default:- false)
+          type: boolean
+          required: false
+        "timedTextLanguage": 
+          description: The language of the timed text.
+          type: string
+          required: false
+        "timedTextTrackName": 
+          description: The timed text track name.
+          type: string
+          required: false
+        "updateViewedDate": 
+          description: Whether to update the view date after successfully updating the file. (Default:- true)
+          type: boolean
+          required: false
+        "useContentAsIndexableText": 
+          description: Whether to use the content as indexable text. (Default:- false)
+          type: boolean
+          required: false
+      body:
+        "application/json": 
+          schema: "file"
+      responses: 
+        "200": 
+          body: 
+            "application/json": 
+              schema: "file"
+    put:
+      description: <<Updates file metadata and/or content.
+       Authorization 
+        This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+        Scope:- |
+        https://www.googleapis.com/auth/drive
+        https://www.googleapis.com/auth/drive.file
+        https://www.googleapis.com/auth/drive.appdata
+        https://www.googleapis.com/auth/drive.scripts
+        https://www.googleapis.com/auth/drive.apps.readonly
+        
+        Body:-
+        In the request body, supply a Files resource with the following properties as the metadata. For more information, see the document, see the document on https://developers.google.com/drive/manage-uploads
+          description:- string, A short description of the file.
+          folderColorRgb:- string, Folder color as an RGB hex string if the file is a folder. The list of supported colors is available in the folderColorPalette field of the About resource. If an unsupported color is specified, it will be changed to the closest color in the palette.
+          indexableText.text:- string, The text to be indexed for this file.
+          labels.hidden:- boolean, Deprecated.
+          labels.restricted:- boolean, Whether viewers are prevented from downloading this file.
+          labels.starred:- boolean, Whether this file is starred by the user.
+          labels.trashed:- boolean, Whether this file has been trashed.
+          labels.viewed:- boolean, Whether this file has been viewed by this user.
+          lastViewedByMeDate:- datetime, Last time this file was viewed by the user (formatted RFC 3339 timestamp).
+          markedViewedByMeDate:- datetime, Time this file was explicitly marked viewed by the user (formatted RFC 3339 timestamp).
+          mimeType:- string, The MIME type of the file. This is only mutable on update when uploading new content. This field can be left blank, and the mimetype will be determined from the uploaded content's MIME type.
+          modifiedDate:- datetime, Last time this file was modified by anyone (formatted RFC 3339 timestamp). This is only mutable on update when the setModifiedDate parameter is set.
+          parents[]:- list, Collection of parent folders which contain this file. Setting this field will put the file in all of the provided folders. On insert, if no folders are provided, the file will be placed in the default root folder.
+          properties[]:- list, The list of properties.
+          title:- string, The title of the file. Used to identify file or folder name.
+          writersCanShare:- boolean, Whether writers can share the document with other users.
+          >>
+      queryParameters:
+        "uploadType": 
+          description: The type of upload request to the /upload URI. Acceptable values are:- |
+            media - Simple upload. Upload the media only, without any metadata.
+            multipart - Multipart upload. Upload both the media and its metadata, in a single request.
+            resumable - Resumable upload. Upload the file in a resumable fashion, using a series of at least two requests where the first request includes the metadata.
+          type: string
+          required: true
+        "addParents": 
+          description: Comma-separated list of parent IDs to add.
+          type: string
+          required: false
+        "convert": 
+          description: Whether to convert this file to the corresponding Google Docs format. (Default:- false)
+          type: boolean
+          required: false
+        "newRevision": 
+          description: Whether a blob upload should create a new revision. If false, the blob data in the current head revision is replaced. If true or not set, a new blob is created as head revision, and previous revisions are preserved (causing increased use of the user's data storage quota). (Default:- true)
+          type: boolean
+          required: false
+        "ocr": 
+          description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads. (Default:- false)
+          type: boolean
+          required: false
+        "ocrLanguage": 
+          description: If ocr is true, hints at the language to use. Valid values are ISO 639-1 codes.
+          type: string
+          required: false
+        "pinned": 
+          description: Whether to pin the head revision of the uploaded file. A file can have a maximum of 200 pinned revisions. (Default:- false)
+          type: boolean
+          required: false
+        "removeParents": 
+          description: Comma-separated list of parent IDs to remove.
+          type: string
+          required: false
+        "setModifiedDate": 
+          description: Whether to set the modified date with the supplied modified date. (Default:- false)
+          type: boolean
+          required: false
+        "timedTextLanguage": 
+          description: The language of the timed text.
+          type: string
+          required: false
+        "timedTextTrackName": 
+          description: The timed text track name.
+          type: string
+          required: false
+        "updateViewedDate": 
+          description: Whether to update the view date after successfully updating the file. (Default:- true)
+          type: boolean
+          required: false
+        "useContentAsIndexableText": 
+          description: Whether to use the content as indexable text. (Default:- false)
+          type: boolean
+          required: false
+      body:
+        "application/json": 
+          schema: "file"
+      responses: 
+        "200": 
+          body: 
+            "application/json": 
+                schema: "file"
+    delete:
+      description: <<Permanently deletes a file by ID. Skips the trash
+       Authorization 
+        This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+        Scope:- |
+        https://www.googleapis.com/auth/drive
+        https://www.googleapis.com/auth/drive.file
+        https://www.googleapis.com/auth/drive.appdata
+      responses: 
+        "200":
+    /copy:
+      post:
+        description: <<Creates a copy of the specified file. 
+         Authorization 
+          This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+          Scope:- |
+          https://www.googleapis.com/auth/drive
+          https://www.googleapis.com/auth/drive.file
+          https://www.googleapis.com/auth/drive.appdata
+          https://www.googleapis.com/auth/drive.apps.readonly
+          
+          Body:-
+          supply a Files resource with the following properties as the metadata. For more information, see the document on https://developers.google.com/drive/manage-uploads
+            description:- string,  A short description of the file.
+            indexableText.text:- string, The text to be indexed for this file.
+            labels.hidden:- boolean, Deprecated.
+            labels.restricted:- boolean, Whether viewers are prevented from downloading this file.
+            labels.starred:- boolean, Whether this file is starred by the user.
+            labels.trashed:- boolean, Whether this file has been trashed.
+            labels.viewed:- boolean, Whether this file has been viewed by this user.
+            lastViewedByMeDate:-datetime, Last time this file was viewed by the user (formatted RFC 3339 timestamp).
+            markedViewedByMeDate:- datetime, Time this file was explicitly marked viewed by the user (formatted RFC 3339 timestamp).
+            mimeType:- string, The MIME type of the file. This is only mutable on update when uploading new content. This field can be left blank, and the mimetype will be determined from the uploaded content's MIME type.
+            modifiedDate:- datetime, Last time this file was modified by anyone (formatted RFC 3339 timestamp). This is only mutable on update when the setModifiedDate parameter is set.
+            parents[]:- list, Collection of parent folders which contain this file.
+            Setting this field will put the file in all of the provided folders. On insert, if no folders are provided, the file will be placed in the default root folder.
+            properties[]:- list, The list of properties.
+            title:- string, The title of the file. Used to identify file or folder name.
+            writersCanShare:- boolean, Whether writers can share the document with other users.
+            >>
+        queryParameters: 
+          "convert": 
+            description: Whether to convert this file to the corresponding Google Docs format. (Default:- false)
+            type: boolean
+            required: false
+          "ocr": 
+            description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads. (Default:- false)
+            type: boolean
+            required: false
+          "ocrLanguage": 
+            description: If ocr is true, hints at the language to use. Valid values are ISO 639-1 codes.
+            type: string
+            required: false
+          "pinned": 
+            description: Whether to pin the head revision of the uploaded file. A file can have a maximum of 200 pinned revisions. (Default:- false)
+            type: boolean
+            required: false
+          "timedTextLanguage": 
+            description: The language of the timed text.
+            type: string
+            required: false
+          "timedTextTrackName": 
+            description: The timed text track name.
+            type: string
+            required: false
+          "visibility": 
+            description: The visibility of the new file. This parameter is only relevant when convert=false. | 
+              Acceptable values are:-
+                "DEFAULT":- The visibility of the new file is determined by the user's default visibility/sharing policies. (default)
+                "PRIVATE":- The new file will be visible to only the owner.
+            type: string
+            required: false
+        body:
+          "application/json": 
+            schema: "file"
+        responses: 
+          "200": 
+            body: 
+              "application/json": 
+                schema: "file"
+    /touch:
+      post:
+        description: <<Set the file's updated time to the current server time.
+          Authorization 
+          This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+          Scope:- |
+          https://www.googleapis.com/auth/drive
+          https://www.googleapis.com/auth/drive.file
+          https://www.googleapis.com/auth/drive.appdata
+          https://www.googleapis.com/auth/drive.apps.readonly
+          >>
+        responses: 
+          "200": 
+            body: 
+              "application/json": 
+                schema: "file"
+    /trash:
+      post:
+        description: <<Moves a file to the trash. Try it now or see an example.
+          Note:- Files moved to the trash still appear by default in results from the files.list method. To permanently remove a file, use files.delete.
+          Authorization 
+          This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+          Scope:- |
+          https://www.googleapis.com/auth/drive
+          https://www.googleapis.com/auth/drive.file
+          https://www.googleapis.com/auth/drive.appdata
+          https://www.googleapis.com/auth/drive.apps.readonly
+          >>
+        responses: 
+          "200": 
+            body: 
+              "application/json": 
+                schema: "file"
+      delete:
+        description: <<Permanently deletes all of the user's trashed files
+         Authorization 
+          This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+          Scope:- |
+          https://www.googleapis.com/auth/drive
+        responses: 
+          "200":
+    /untrash:
+      post:
+        description: <<Restores a file from the trash.
+          Authorization 
+          This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+          Scope:- |
+          https://www.googleapis.com/auth/drive
+          https://www.googleapis.com/auth/drive.file
+          https://www.googleapis.com/auth/drive.appdata
+          https://www.googleapis.com/auth/drive.apps.readonly
+          >>
+        responses: 
+          "200": 
+            body: 
+              "application/json": 
+                schema: "file"
+    /watch:
+      post:
+        description: <<Restores a file from the trash.
+          Authorization 
+          This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+          Scope:- |
+          https://www.googleapis.com/auth/drive
+          https://www.googleapis.com/auth/drive.file
+          https://www.googleapis.com/auth/drive.appdata
+          https://www.googleapis.com/auth/drive.apps.readonly
+          >>
+        body: 
+          "application/json": 
+            schema: "watch"
+        responses: 
+          "200": 
+            body: 
+              "application/json": 
+                schema: "watchResponse"
+    /parents:
+      get:
+          description: <<Lists a file's parents.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "listParents"
+      post:
+          description: <<Adds a parent folder for a file.. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+            Body:-
+              In the request body, supply a Parents resource with the following properties:-
+                id:- string, The ID of the child.
+            >>
+          body: 
+            "application/json": 
+              schema: "parent"
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "parent"
+      /{parentId}:
+        uriParameters: 
+          "parentId": 
+            displayName: "parentId"
+            description: The ID of the folder.
+            type: string
+            required: true
+            repeat: false
+        delete:
+          description: <<Removes a parent from a file. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            >>
+          responses: 
+            "200":
+        get:
+          description: <<Retreives a parent from a folder. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "parent"
+    /permissions:
+      get:
+          description: <<Lists a file's permissions. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            >>
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "listPermisions"
+      post:
+          description: <<Inserts a permission for a file. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            Body:-
+              In the request body, supply a Permissions resource with the following properties:-
+                role:- string, The primary role for this user. Allowed values are:-
+                  owner
+                  reader
+                  writer
+                  writable
+                type:- string, The account type. Allowed values are:-
+                  user
+                  group
+                  domain
+                  anyone
+            >>
+          queryParameters: 
+            "additionalRoles": 
+              description: Array of Additional roles for this user. Only commenter is currently allowed.
+              type: string
+              required: false
+            "id": 
+              description: The ID of the user this permission refers to, and identical to the permissionId in the About and Files resources. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified
+              type: string
+              required: false
+            "value": 
+              description: The email address or domain name for the entity. This is used during inserts and is not populated in responses. When making a drive.permissions.insert request, exactly one of the id or value fields must be specified.
+              type: string
+              required: false
+            "withLink": 
+              description: Whether the link is required for this permission.
+              type: string
+              required: false
+          body: 
+            "application/json": 
+              schema: "permissions"
+          responses: 
+            "200": 
+              body: 
+               "application/json": 
+                  schema: "permissions"
+      /{permissionId}:
+        uriParameters: 
+          "permissionId": 
+            displayName: "permissionId"
+            description: The ID for the permission.
+            type: string
+            required: true
+            repeat: false
+        delete:
+          description: <<Deletes a permission from a file.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            >>
+          responses: 
+            "200":
+        get:
+          description: <<Gets a permission by ID.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            >>
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "permissions"
+        patch:
+          description: <<Updates a permission. This method supports patch semantics. 
+           Warning:- Concurrent permissions operations on the same file are not supported; only the last update is applied.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+           Body:-
+             In the request body, supply the relevant portions of a Permissions resource, according to the rules of patch semantics.
+            >>
+          queryParameters: 
+            "transferOwnership": 
+              description: Whether changing a role to 'owner' should also downgrade the current owners to writers. (Default:- false)
+              type: boolean
+              required: false
+          body: 
+            "application/json": 
+              schema: "permissions"
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "permissions"
+        put:
+          description: <<Updates a permission. This method supports patch semantics. 
+           Warning:- Concurrent permissions operations on the same file are not supported; only the last update is applied.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+           Body:-
+             In the request body, supply a Permissions resource with the following properties:-
+             additionalRoles:- string, Array of Additional roles for this user. Only commenter is currently allowed.
+            role:- string, The primary role for this user. Allowed values are:-
+              owner
+              reader
+              writer
+            >>
+          queryParameters: 
+            "transferOwnership": 
+              description: Whether changing a role to 'owner' should also downgrade the current owners to writers. (Default:- false)
+              type: boolean
+              required: false
+          body: 
+            "application/json": 
+              schema: "permissions"
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "permissions"
+    /revisions:
+      get:
+          description: <<Lists a file's revisions
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "listRevisons"
+      /{revisionId}:
+        uriParameters: 
+          "revisionId": 
+            displayName: "revisionId"
+            description: The ID of the revision.
+            type: string
+            required: true
+            repeat: false
+        delete:
+          description: <<Removes a revision. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          responses: 
+            "200":
+        get:
+          description: <<Gets a specific revision.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "revision"
+        patch:
+          description: <<Updates a revision. This method supports patch semantics. 
+           Warning:- Concurrent permissions operations on the same file are not supported; only the last update is applied.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+           Body:-
+             In the request body, supply the relevant portions of a Permissions resource, according to the rules of patch semantics.
+            >>
+          body: 
+            "application/json": 
+              schema: "revision"
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "revision"
+        put:
+          description: <<Updates a revision. This method supports patch semantics. 
+           Warning:- Concurrent permissions operations on the same file are not supported; only the last update is applied.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+           Body:-
+             In the request body, supply a Revisions resource with the following properties:-
+              pinned:- boolean, Whether this revision is pinned to prevent automatic purging. This will only be populated and can only be modified on files with content stored in Drive which are not Google Docs. Revisions can also be pinned when they are created through the drive.files.insert/update/copy by using the pinned query parameter.
+              publishAuto:- boolean, Whether subsequent revisions will be automatically republished. This is only populated and can only be modified for Google Docs.
+              published:- boolean, Whether this revision is published. This is only populated and can only be modified for Google Docs.
+              publishedOutsideDomain:- boolean, Whether this revision is published outside the domain. This is only populated and can only be modified for Google Docs.
+            >>
+          body: 
+            "application/json": 
+              schema: "revision"
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "revision"
+    /comments:
+      get:
+          description: <<Lists a file's comments.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          queryParameters: 
+            "includeDeleted": 
+              description: If set, this will succeed when retrieving a deleted comment, and will include any deleted replies. (Default:- false)
+              type: boolean
+              required: false
+            "maxResults": 
+              description: The maximum number of discussions to include in the response, used for paging. Acceptable values are 0 to 100, inclusive. (Default:- 20)
+              type: integer
+              required: false
+            "pageToken": 
+              description: The continuation token, used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+              type: string
+              required: false
+            "updatedMin": 
+              description: IOnly discussions that were updated after this timestamp will be returned. Formatted as an RFC 3339 timestamp.
+              type: string
+              required: false
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "listComments"
+      post:
+        description: <<Adds a comment. 
+          Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+          Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+            Body:-
+              content:- string, The plain text content used to create this comment. This is not HTML safe and should only be used as a starting point to make edits to a comment's content. - required
+              context.type:- string, The MIME type of the context snippet. - optional
+              context.value:- string, Data representation of the segment of the file being commented on. In the case of a text file for example, this would be the actual text that the comment is about. - optional
+          >>
+        body: 
+          "application/json": 
+            schema: "comment"
+        responses: 
+          "200": 
+            body: 
+              "application/json": 
+                schema: "comment"
+      /{commentId}:
+        uriParameters: 
+          "commentId": 
+            displayName: "commentId"
+            description: The ID of the comment.
+            type: string
+            required: true
+            repeat: false
+        delete:
+          description: <<Deletes a comment. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          responses: 
+            "200":
+        get:
+          description: <<Gets a comment by ID. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          queryParameters: 
+            "includeDeleted": 
+              description: If set, this will succeed when retrieving a deleted comment, and will include any deleted replies. (Default:- false)
+              type: boolean
+              required: false
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "comment"
+        patch:
+          description: <<Updates a revision. This method supports patch semantics. 
+           Warning:- Concurrent permissions operations on the same file are not supported; only the last update is applied.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+           Body:-
+             In the request body, supply the relevant portions of a Comments resource, according to the rules of patch semantics.
+            >>
+          body: 
+            "application/json": 
+              schema: "comment"
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "comment"
+        put:
+          description: <<Updates a comment. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+           Body:-
+             In the request body, supply a Comments resource with the following properties:-
+             content:- string, The plain text content used to create this comment. This is not HTML safe and should only be used as a starting point to make edits to a comment's content.
+            >>
+          body: 
+            "application/json": 
+              schema: "comment"
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "comment"
+        /replies:
+          get:
+            description: <<Lists all of the replies to a comment.
+             Authorization 
+              This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+              Scope:- |
+              https://www.googleapis.com/auth/drive
+              https://www.googleapis.com/auth/drive.file
+              https://www.googleapis.com/auth/drive.readonly
+              https://www.googleapis.com/auth/drive.metadata.readonly
+              https://www.googleapis.com/auth/drive.appdata
+              >>
+            queryParameters: 
+              "includeDeleted": 
+                description: If set, this will succeed when retrieving a deleted comment, and will include any deleted replies. (Default:- false)
+                type: boolean
+                required: false
+              "maxResults": 
+                description: The maximum number of discussions to include in the response, used for paging. Acceptable values are 0 to 100, inclusive. (Default:- 20)
+                type: integer
+                required: false
+              "pageToken": 
+                description: The continuation token, used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+                type: string
+                required: false
+            responses: 
+              "200": 
+                body: 
+                  "application/json": 
+                    schema: "listReplies"
+          post:
+            description: <<Creates a new reply to the given comment.
+              Authorization 
+                This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+              Scope:- |
+                https://www.googleapis.com/auth/drive
+                https://www.googleapis.com/auth/drive.file
+                https://www.googleapis.com/auth/drive.appdata
+                Body:-
+                  In the request body, supply a Replies resource with the following properties:-
+                  content:- string, The plain text content used to create this reply. This is not HTML safe and should only be used as a starting point to make edits to a reply's content. This field is required on inserts if no verb is specified (resolve/reopen).
+                  verb:- string, The action this reply performed to the parent comment. When creating a new reply this is the action to be perform to the parent comment. Possible values are:-
+                      "resolve" - To resolve a comment.
+                      "reopen" - To reopen (un-resolve) a comment.
+              >>
+            body: 
+              "application/json": 
+                schema: "replies"
+            responses: 
+              "200": 
+                body: 
+                  "application/json": 
+                    schema: "replies"
+          /{replyId}:
+            uriParameters: 
+              "replyId": 
+                displayName: "replyId"
+                description: The ID of the folder.
+                type: string
+                required: true
+                repeat: false
+            delete:
+              description: <<Deletes a reply. 
+               Authorization 
+                This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+                Scope:- |
+                https://www.googleapis.com/auth/drive
+                https://www.googleapis.com/auth/drive.file
+                https://www.googleapis.com/auth/drive.appdata
+                >>
+              responses: 
+                "200":
+            get:
+              description: <<Gets a reply.  
+               Authorization 
+                This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+                Scope:- |
+                https://www.googleapis.com/auth/drive
+                https://www.googleapis.com/auth/drive.file
+                https://www.googleapis.com/auth/drive.readonly
+                https://www.googleapis.com/auth/drive.metadata.readonly
+                https://www.googleapis.com/auth/drive.appdata
+                >>
+              queryParameters: 
+                "includeDeleted": 
+                  description: If set, this will succeed when retrieving a deleted reply. (Default:- false)
+                  type: boolean
+                  required: false
+              responses: 
+                "200": 
+                  body: 
+                    "application/json": 
+                      schema: "replies"
+            patch:
+              description: <<Updates an existing reply. This method supports patch semantics. 
+               Warning:- Concurrent permissions operations on the same file are not supported; only the last update is applied.
+               Authorization 
+                This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+                Scope:- |
+                https://www.googleapis.com/auth/drive
+                https://www.googleapis.com/auth/drive.file
+                https://www.googleapis.com/auth/drive.appdata
+               Body:-
+                 In the request body, supply the relevant portions of a Comments resource, according to the rules of patch semantics.
+                >>
+              body: 
+                "application/json": 
+                  schema: "replies"
+              responses: 
+                "200": 
+                    body: 
+                      "application/json": 
+                        schema: "replies"
+            put:
+              description: <<Updates a comment. 
+               Authorization 
+                This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+                Scope:- |
+                https://www.googleapis.com/auth/drive
+                https://www.googleapis.com/auth/drive.file
+                https://www.googleapis.com/auth/drive.appdata
+               Body:-
+                 In the request body, supply a Comments resource with the following properties:-
+                 content:- string, The plain text content used to create this comment. This is not HTML safe and should only be used as a starting point to make edits to a comment's content. - required
+                 verb:-string, The action this reply performed to the parent comment. When creating a new reply this is the action to be perform to the parent comment. Possible values are:-
+                    "resolve" - To resolve a comment.
+                    "reopen" - To reopen (un-resolve) a comment.
+                  - optional
+                >>
+              body: 
+                "application/json": 
+                  schema: "replies"
+              responses: 
+                "200": 
+                  body: 
+                   "application/json": 
+                      schema: "replies"
+    /properties:
+      get:
+          description: <<Lists a file's comments.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          queryParameters: 
+            "includeDeleted": 
+              description: If set, this will succeed when retrieving a deleted comment, and will include any deleted replies. (Default:- false)
+              type: boolean
+              required: false
+            "maxResults": 
+              description: The maximum number of discussions to include in the response, used for paging. Acceptable values are 0 to 100, inclusive. (Default:- 20)
+              type: integer
+              required: false
+            "pageToken": 
+              description: The continuation token, used to page through large result sets. To get the next page of results, set this parameter to the value of "nextPageToken" from the previous response.
+              type: string
+              required: false
+            "updatedMin": 
+              description: IOnly discussions that were updated after this timestamp will be returned. Formatted as an RFC 3339 timestamp.
+              type: string
+              required: false
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "listProperties"
+      post:
+        description: <<Adds a property to a file.
+          Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+          Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+            Body:-
+              content:- string, The plain text content used to create this comment. This is not HTML safe and should only be used as a starting point to make edits to a comment's content. - required
+              context.type:- string, The MIME type of the context snippet. - optional
+              context.value:- string, Data representation of the segment of the file being commented on. In the case of a text file for example, this would be the actual text that the comment is about. - optional
+          >>
+        body: 
+          "application/json": 
+            schema: "properties"
+        responses: 
+          "200": 
+            body: 
+              "application/json": 
+                schema: "properties"
+      /{propertyKey}:
+        uriParameters: 
+          "propertyKey": 
+            displayName: "propertyKey"
+            description: The ID of the property.
+            type: string
+            required: true
+            repeat: false
+        delete:
+          description: <<Deletes a property.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          queryParameters: 
+            "visibility": 
+              description: he visibility of the property.
+              type: string
+              required: false
+          responses: 
+            "200":
+        get:
+          description: <<Gets a comment by ID. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          queryParameters: 
+            "visibility": 
+              description: he visibility of the property.
+              type: string
+              required: false
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "properties"
+        patch:
+          description: <<Updates a property. This method supports patch semantics. 
+           Warning:- Concurrent permissions operations on the same file are not supported; only the last update is applied.
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+           Body:-
+             In the request body, supply the relevant portions of a Properties resource, according to the rules of patch semantics.
+            >>
+          body: 
+            "application/json": 
+              schema: "properties"
+          responses: 
+            "200": 
+              body: 
+               "application/json": 
+                  schema: "properties"
+        put:
+          description: <<Updates a property. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          body: 
+            "application/json": 
+              schema: "properties"
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "properties"
+        
+  /{folderId}:
+    uriParameters: 
+      "folderId": 
+        displayName: "folderId"
+        description: The ID of the folder.
+        type: string
+        required: true
+        repeat: false
+    /children:
+      get:
+          description: <<Lists a folder's children. To list all children of the root folder, use the alias root for the folderId value
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          queryParameters: 
+            "maxResults": 
+              description: Maximum number of children to return. Acceptable values are 0 to 1000, inclusive. (Default:- 100)
+              type: integer
+              required: false
+            "pageToken": 
+              description: Page token for children.
+              type: string
+              required: false
+            "q": 
+              description: Query string for searching children. See Searching for files for more information about supported fields and operations.
+              type: string
+              required: false
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "listChildren"
+      post:
+          description: <<Adds a child for a folder. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.appdata
+            Body:-
+              In the request body, supply a Children resource with the following properties:-
+                id:- string, The ID of the child.
+            >>
+          body: 
+            "application/json": 
+              schema: "children"
+          responses: 
+            "200": 
+              body: 
+               "application/json": 
+                  schema: "children"
+      /{childId}:
+        uriParameters: 
+          "childId": 
+            displayName: "childId"
+            description: The ID of the child.
+            type: string
+            required: true
+            repeat: false
+        delete:
+          description: <<Removes a child from a folder. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            >>
+          responses: 
+            "200":
+        get:
+          description: <<retreives a child from a folder. 
+           Authorization 
+            This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+            Scope:- |
+            https://www.googleapis.com/auth/drive
+            https://www.googleapis.com/auth/drive.file
+            https://www.googleapis.com/auth/drive.readonly
+            https://www.googleapis.com/auth/drive.metadata.readonly
+            https://www.googleapis.com/auth/drive.appdata
+            >>
+          responses: 
+            "200": 
+              body: 
+                "application/json": 
+                  schema: "children"
+/about:
+  get:
+      description: <<Gets the information about the current user along with Drive API settings
+        Authorization 
+        This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+        Scope:- |
+        https://www.googleapis.com/auth/drive
+        https://www.googleapis.com/auth/drive.file
+        https://www.googleapis.com/auth/drive.readonly
+        https://www.googleapis.com/auth/drive.metadata.readonly
+        https://www.googleapis.com/auth/drive.appdata
+        >>
+      queryParameters: 
+        "includeSubscribed": 
+          description: When calculating the number of remaining change IDs, whether to include public files the user has opened and shared files. When set to false, this counts only change IDs for owned files and any shared or public files that the user has explicitly added to a folder they own. (Default:- true)
+          type: boolean
+          required: false
+        "maxChangeIdCount": 
+          description: Maximum number of remaining change IDs to count
+          type: number
+          required: false
+        "startChangeId": 
+          description: Change ID to start counting from when calculating number of remaining change IDs
+          type: number
+          required: false
+      responses: 
+        "200": 
+          body: 
+            "application/json": 
+                schema: "aboutResponse"
+/changes:
+  get:
+    description: <<Lists the changes for a user
+      Authorization 
+      This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+      Scope:- |
+      https://www.googleapis.com/auth/drive
+      https://www.googleapis.com/auth/drive.file
+      https://www.googleapis.com/auth/drive.readonly
+      https://www.googleapis.com/auth/drive.metadata.readonly
+      https://www.googleapis.com/auth/drive.appdata
+      https://www.googleapis.com/auth/drive.apps.readonly
+      >>
+    queryParameters: 
+      "includeDeleted": 
+        description: Whether to include deleted items. (Default:- true)
+        type: boolean
+        required: false
+      "includesubscribed": 
+        description: Whether to include public files the user has opened and shared files. When set to false, the list only includes owned files plus any shared or public files the user has explicitly added to a folder they own. (Default:- true)
+        type: boolean
+        required: false
+      "maxResults": 
+        description: Maximum number of changes to return. Acceptable values are 0 to 1000, inclusive. (Default:- 100)
+        type: integer
+        required: false
+      "pageToken": 
+        description: Page token for changes.
+        type: string
+        required: false
+      "startChangeId": 
+        description: Change ID to start listing changes from.
+        type: number
+        required: false
+    responses: 
+      "200": 
+        body: 
+          "application/json": 
+            schema: "listResponse"
+  post:
+    description: <<Watch for all changes to a user's Drive
+      Authorization 
+      This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+      Scope:- |
+      https://www.googleapis.com/auth/drive
+      https://www.googleapis.com/auth/drive.file
+      https://www.googleapis.com/auth/drive.readonly
+      https://www.googleapis.com/auth/drive.metadata.readonly
+      https://www.googleapis.com/auth/drive.appdata
+      https://www.googleapis.com/auth/drive.apps.readonly
+      >>
+    body: 
+      "application/json": 
+        schema: "watch"
+    responses: 
+      "200": 
+        body: 
+          "application/json": 
+            schema: "watchResponse"
+  /{changeId}:
+    uriParameters: 
+      "changeId": 
+        displayName: "changeId"
+        description: The ID of the change.
+        type: string
+        required: true
+        repeat: false
+    get:
+        description: <<Gets a specific change.
+          Authorization 
+          This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+          Scope:- |
+          https://www.googleapis.com/auth/drive
+          https://www.googleapis.com/auth/drive.file
+          https://www.googleapis.com/auth/drive.readonly
+          https://www.googleapis.com/auth/drive.metadata.readonly
+          https://www.googleapis.com/auth/drive.appdata
+          https://www.googleapis.com/auth/drive.apps.readonly
+          >>
+        responses: 
+          "200": 
+            body: 
+              "application/json": 
+                schema: "changeResponse"
+/permissionIds:
+  /{email}:
+    uriParameters: 
+      "email": 
+        displayName: "email"
+        description: The email address.
+        type: string
+        required: true
+        repeat: false
+    get:
+      description: <<Returns the permission ID for an email address.
+        Authorization 
+          This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+        Scope:- |
+        https://www.googleapis.com/auth/drive
+        https://www.googleapis.com/auth/drive.file
+        https://www.googleapis.com/auth/drive.readonly
+        https://www.googleapis.com/auth/drive.metadata.readonly
+        https://www.googleapis.com/auth/drive.appdata
+        https://www.googleapis.com/auth/drive.apps.readonly
+        >>
+      responses: 
+        "200": 
+          body: 
+            "application/json": 
+              schema: "permissionId"
+/apps:
+  get:
+    description: <<Lists a file's revisions
+      Authorization 
+        This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+      Scope:- |
+        https://www.googleapis.com/auth/drive
+        https://www.googleapis.com/auth/drive.file
+        https://www.googleapis.com/auth/drive.readonly
+        https://www.googleapis.com/auth/drive.metadata.readonly
+        https://www.googleapis.com/auth/drive.appdata
+      >>
+    queryParameters: 
+      "appFilterExtensions": 
+        description: A comma-separated list of file extensions for open with filtering. All apps within the given app query scope which can open any of the given file extensions will be included in the response. If appFilterMimeTypes are provided as well, the result is a union of the two resulting app lists.
+        type: string
+        required: false
+      "appFilterMimeTypes": 
+        description: A comma-separated list of MIME types for open with filtering. All apps within the given app query scope which can open any of the given MIME types will be included in the response. If appFilterExtensions are provided as well, the result is a union of the two resulting app lists.
+        type: string
+        required: false
+      "languageCode": 
+        description: A language or locale code, as defined by BCP 47, with some extensions from the Unicode LDML format.        
+        type: string
+        required: false
+    responses: 
+      "200": 
+        body: 
+          "application/json": 
+            schema: "listApps"
+  /{appId}:
+    uriParameters: 
+      "appId": 
+        displayName: "appId"
+        description: The ID of the app.
+        type: string
+        required: true
+        repeat: false
+    get:
+      description: <<Gets a specific app. 
+        Authorization 
+          This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+        Scope:- |
+          https://www.googleapis.com/auth/drive
+          https://www.googleapis.com/auth/drive.file
+          https://www.googleapis.com/auth/drive.readonly
+          https://www.googleapis.com/auth/drive.metadata.readonly
+          https://www.googleapis.com/auth/drive.appdata
+          https://www.googleapis.com/auth/drive.apps.readonly
+        >>
+      responses: 
+        "200": 
+          body: 
+            "application/json": 
+              schema: "apps"
+/channels/stop:
+  post:
+    description: <<Stop watching for changes to a resource.
+      >>
+    body: 
+      "application/json": 
+        schema: "stopRequest"
+    responses: 
+      "200": 

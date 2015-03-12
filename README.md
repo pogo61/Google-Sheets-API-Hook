@@ -4,7 +4,7 @@ Link to product documentation and product overview page
 ## Google Sheets API 
 ### About the API
 - CRUD spreadsheets on Google Drive
-- Home Page: [SmartyStreet] (https://smartystreets.com)
+- Home Page: [Google Sheets API docs] (https://developers.google.com/google-apps/spreadsheets/)
 - API Documentation: [Google Sheets API docs] (https://developers.google.com/google-apps/spreadsheets/)
 
 ### Pre-Reqs
@@ -29,8 +29,8 @@ https://spreadsheets.google.com/feeds,https://www.googleapis.com/auth/drive,http
   - make sure select the migrations.properties file 
   - click Okay to start the importation of the hook.
 - this will create a Google Sheets API Hook Organisation with the requisite artefacts needed to run the API.
-- you can us the API as is calling http://"URL of the Listener of your ND"/cell/cell, or you can create an API in CM and expost it.
-    - if you chose to create an API in CM, you must create a Service in your CM tenant which is a Virtual Service of the Google_Sheets_Integrator VS that was created by the import. Then Go to CM and create a API from an existing Service.
+- you can us the API as is calling http://"URL of the Listener of your ND"/sheets_hook, or you can create an API in CM and expost it.
+    - if you chose to create an API in CM, you must create a Service in your CM tenant which is a Virtual Service of the Google_Sheets_API VS that was created by the import. Then Go to CM and create a API from an existing Service.
 
 #### Verify Import
 - Expand the services folder in the Google Sheets API Hook you imported and find Google_Sheets_Integrator VS
@@ -51,8 +51,8 @@ https://spreadsheets.google.com/feeds,https://www.googleapis.com/auth/drive,http
 - ensure that the status changes to "State: Active"
 
 #### Verify Connectivity
-- Using curl http://"URL of the Listener of your ND"/cell/cell
--  the response should be {"status":"success", "cellContent": "value"} where "value" is the contents of the first cell, in the first workbook, of the first spreadsheet, that the user defined in the tns:userAccountEmail element of the security policy assertion.
+- Using curl http://"URL of the Listener of your ND"/sheets_hook/<what ever operation you want>
+-  the response should be that expected for the operation. Note, there is no need to do any OAuth actions, as the Hook looks after that.
 
 ### Modify and Build
 In the event you need to change the API Hook.   Here are the instructions to do so. 

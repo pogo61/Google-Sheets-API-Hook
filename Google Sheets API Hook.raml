@@ -1,6 +1,6 @@
 #%RAML 0.8
-title: Google Sheets API
-version: 3.0
+title: Google Sheets API Hook
+version: 1.0
 baseUri: https://spreadsheets.google.com/feeds
 securedBy: [oauth_2_0]
 securitySchemes:
@@ -40,15 +40,15 @@ securitySchemes:
     responses:
       200:
         body:
-          application/atom+xml:
+          application/xml:
             example: |
                 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/">
                   <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full</id>
                   <updated>2015-01-16T05:40:13.379Z</updated>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/spreadsheet" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
                   <title type="text">Available Spreadsheets - paulpog@japarasolutions.com</title>
                   <link rel="alternate" type="text/html" href="http://docs.google.com" />
-                  <link rel="http://schemas.google.com/g/2005/feed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full" />
+                  <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full" />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full" />
                   <openSearch:totalResults>5</openSearch:totalResults>
                   <openSearch:startIndex>1</openSearch:startIndex>
@@ -57,10 +57,10 @@ securitySchemes:
                   https://spreadsheets.google.com/feeds/spreadsheets/private/full/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo
                   </id>
                   <updated>2015-01-16T04:29:58.834Z</updated>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/spreadsheet" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
                   <title type="text">Hello World</title>
                   <content type="text">Hello World</content>
-                  <link rel="http://schemas.google.com/spreadsheets/2006/worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/private/full" />
+                  <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/private/full" />
                   <link rel="alternate" type="text/html" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/edit" />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo" />
                   <author>
@@ -71,10 +71,10 @@ securitySchemes:
                   <entry>
                   <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full/tbu-6zoUX4V6XWmJBQeQvzA</id>
                   <updated>2013-01-12T20:55:43.466Z</updated>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/spreadsheet" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
                   <title type="text">January 11 2013 ProServe Engagement</title>
                   <content type="text">January 11 2013 ProServe Engagement</content>
-                  <link rel="http://schemas.google.com/spreadsheets/2006/worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/tbu-6zoUX4V6XWmJBQeQvzA/private/values" />
+                  <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/tbu-6zoUX4V6XWmJBQeQvzA/private/values" />
                   <link rel="alternate" type="text/html" href="https://spreadsheets.google.com/ccc?key=0AgKrVCbAmqO9dGJ1LTZ6b1VYNFY2WFdtSkJRZVF2ekE" />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/tbu-6zoUX4V6XWmJBQeQvzA" />
                   <author>
@@ -85,10 +85,10 @@ securitySchemes:
                   <entry>
                   <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full/t8SNhinY21OC6eJTGQlpQxA</id>
                   <updated>2012-12-20T07:20:58.796Z</updated>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/spreadsheet" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
                   <title type="text">API test results</title>
                   <content type="text">API test results</content>
-                  <link rel="http://schemas.google.com/spreadsheets/2006/worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/t8SNhinY21OC6eJTGQlpQxA/private/full" />
+                  <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/t8SNhinY21OC6eJTGQlpQxA/private/full" />
                   <link rel="alternate" type="text/html" href="https://spreadsheets.google.com/ccc?key=0AltuRm_7iT6CdDhTTmhpblkyMU9DNmVKVEdRbHBReEE" />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/t8SNhinY21OC6eJTGQlpQxA" />
                   <author>
@@ -99,10 +99,10 @@ securitySchemes:
                   <entry>
                   <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full/tBeNp6xXYNK4LFle9fIv-tA</id>
                   <updated>2012-10-22T07:16:26.002Z</updated>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/spreadsheet" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
                   <title type="text">Custell Development Testing Log</title>
                   <content type="text">Custell Development Testing Log</content>
-                  <link rel="http://schemas.google.com/spreadsheets/2006/worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/tBeNp6xXYNK4LFle9fIv-tA/private/full" />
+                  <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/tBeNp6xXYNK4LFle9fIv-tA/private/full" />
                   <link rel="alternate" type="text/html" href="https://spreadsheets.google.com/ccc?key=0Aptp56nRSLhvdEJlTnA2eFhZTks0TEZsZTlmSXYtdEE" />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/tBeNp6xXYNK4LFle9fIv-tA" />
                   <author>
@@ -113,10 +113,10 @@ securitySchemes:
                   <entry>
                   <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full/t8tSsj__33gyUM1vJnsfE7A</id>
                   <updated>2011-12-10T06:02:29.461Z</updated>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/spreadsheet" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
                   <title type="text">Custell Performace Testing</title>
                   <content type="text">Custell Performace Testing</content>
-                  <link rel="http://schemas.google.com/spreadsheets/2006/worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/t8tSsj__33gyUM1vJnsfE7A/private/full" />
+                  <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/t8tSsj__33gyUM1vJnsfE7A/private/full" />
                   <link rel="alternate" type="text/html" href="https://spreadsheets.google.com/ccc?key=0Aptp56nRSLhvdDh0U3NqX18zM2d5VU0xdkpuc2ZFN0E" />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/t8tSsj__33gyUM1vJnsfE7A" />
                   <author>
@@ -125,13 +125,104 @@ securitySchemes:
                   </author>
                   </entry>
                 </feed>
+  /{key}:
+    get:
+      description: <<get a spreadsheet that is defined by the {key}. Only visibility of "private" and protection of "full" is allowed on this resource>>
+      responses:
+        200:
+          body:
+            application/xml:
+              example: |
+                  <feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/">
+                    <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full</id>
+                    <updated>2015-01-16T05:40:13.379Z</updated>
+                    <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
+                    <title type="text">Available Spreadsheets - paulpog@japarasolutions.com</title>
+                    <link rel="alternate" type="text/html" href="http://docs.google.com" />
+                    <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full" />
+                    <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full" />
+                    <openSearch:totalResults>5</openSearch:totalResults>
+                    <openSearch:startIndex>1</openSearch:startIndex>
+                    <entry>
+                    <id>
+                    https://spreadsheets.google.com/feeds/spreadsheets/private/full/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo
+                    </id>
+                    <updated>2015-01-16T04:29:58.834Z</updated>
+                    <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
+                    <title type="text">Hello World</title>
+                    <content type="text">Hello World</content>
+                    <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/private/full" />
+                    <link rel="alternate" type="text/html" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/edit" />
+                    <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo" />
+                    <author>
+                    <name>paulpog</name>
+                    <email>paulpog@japarasolutions.com</email>
+                    </author>
+                    </entry>
+                    <entry>
+                    <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full/tbu-6zoUX4V6XWmJBQeQvzA</id>
+                    <updated>2013-01-12T20:55:43.466Z</updated>
+                    <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
+                    <title type="text">January 11 2013 ProServe Engagement</title>
+                    <content type="text">January 11 2013 ProServe Engagement</content>
+                    <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/tbu-6zoUX4V6XWmJBQeQvzA/private/values" />
+                    <link rel="alternate" type="text/html" href="https://spreadsheets.google.com/ccc?key=0AgKrVCbAmqO9dGJ1LTZ6b1VYNFY2WFdtSkJRZVF2ekE" />
+                    <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/tbu-6zoUX4V6XWmJBQeQvzA" />
+                    <author>
+                    <name>96redpony</name>
+                    <email>96redpony@gmail.com</email>
+                    </author>
+                    </entry>
+                    <entry>
+                    <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full/t8SNhinY21OC6eJTGQlpQxA</id>
+                    <updated>2012-12-20T07:20:58.796Z</updated>
+                    <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
+                    <title type="text">API test results</title>
+                    <content type="text">API test results</content>
+                    <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/t8SNhinY21OC6eJTGQlpQxA/private/full" />
+                    <link rel="alternate" type="text/html" href="https://spreadsheets.google.com/ccc?key=0AltuRm_7iT6CdDhTTmhpblkyMU9DNmVKVEdRbHBReEE" />
+                    <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/t8SNhinY21OC6eJTGQlpQxA" />
+                    <author>
+                    <name>cynthia.qiao</name>
+                    <email>cynthia.qiao@gmail.com</email>
+                    </author>
+                    </entry>
+                    <entry>
+                    <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full/tBeNp6xXYNK4LFle9fIv-tA</id>
+                    <updated>2012-10-22T07:16:26.002Z</updated>
+                    <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
+                    <title type="text">Custell Development Testing Log</title>
+                    <content type="text">Custell Development Testing Log</content>
+                    <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/tBeNp6xXYNK4LFle9fIv-tA/private/full" />
+                    <link rel="alternate" type="text/html" href="https://spreadsheets.google.com/ccc?key=0Aptp56nRSLhvdEJlTnA2eFhZTks0TEZsZTlmSXYtdEE" />
+                    <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/tBeNp6xXYNK4LFle9fIv-tA" />
+                    <author>
+                    <name>john.smibert</name>
+                    <email>john.smibert@gmail.com</email>
+                    </author>
+                    </entry>
+                    <entry>
+                    <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full/t8tSsj__33gyUM1vJnsfE7A</id>
+                    <updated>2011-12-10T06:02:29.461Z</updated>
+                    <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet" />
+                    <title type="text">Custell Performace Testing</title>
+                    <content type="text">Custell Performace Testing</content>
+                    <link rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/t8tSsj__33gyUM1vJnsfE7A/private/full" />
+                    <link rel="alternate" type="text/html" href="https://spreadsheets.google.com/ccc?key=0Aptp56nRSLhvdDh0U3NqX18zM2d5VU0xdkpuc2ZFN0E" />
+                    <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/t8tSsj__33gyUM1vJnsfE7A" />
+                    <author>
+                    <name>john.smibert</name>
+                    <email>john.smibert@gmail.com</email>
+                    </author>
+                    </entry>
+                  </feed>
 /worksheets/{key}/{visibility}/{protection}:
   get:
-    description: <<request a list of worksheets in a given spreadsheet, issue a GET request to that URL, with an appropriate authorization header. The Key is retreived from the "link" element that has rel="http://schemas.google.com/spreadsheets/2006/tablesfeed" in the apparopriate "entry" element from the GET spreadsheet list response. That element's href value provides the URL for that spreadsheet's worksheets feed. >>
+    description: <<request a list of worksheets in a given spreadsheet, issue a GET request to that URL, with an appropriate authorization header. The Key is retreived from the "link" element that has rel="http://schemas.google.com/spreadsheets/2006#tablesfeed" in the apparopriate "entry" element from the GET spreadsheet list response. That element's href value provides the URL for that spreadsheet's worksheets feed. >>
     responses:
       200:
         body:
-          application/atom+xml:
+          application/xml:
             example: |
                 <feed xmlns="http://www.w3.org/2005/Atom"
                   xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/"
@@ -143,12 +234,12 @@ securitySchemes:
                   <title type="text">Groceries R Us</title>
                   <link rel="alternate" type="text/html"
                       href="https://spreadsheets.google.com/ccc?key=key"/>
-                  <link rel="http://schemas.google.com/g/2005/feed"
+                  <link rel="http://schemas.google.com/g/2005#feed"
                       type="application/atom+xml"
                       href="https://spreadsheets.google.com/feeds/worksheets/key/private/full"/>
                   <link rel="self" type="application/atom+xml"
                       href="https://spreadsheets.google.com/feeds/worksheets/key/private/full"/>
-                  <link rel="http://schemas.google.com/g/2005/post" type="application/atom+xml"
+                  <link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml"
                       href="https://spreadsheets.google.com/feeds/worksheets/key/private/full"/>
                   <author>
                     <name>Fitzwilliam Darcy</name>
@@ -162,10 +253,10 @@ securitySchemes:
                     <updated>2006-11-17T18:23:45.173Z</updated>
                     <title type="text">Sheet1</title>
                     <content type="text">Sheet1</content>
-                    <link rel="http://schemas.google.com/spreadsheets/2006/listfeed"
+                    <link rel="http://schemas.google.com/spreadsheets/2006#listfeed"
                         type="application/atom+xml"
                         href="https://spreadsheets.google.com/feeds/list/key/worksheetId/private/full"/>
-                    <link rel="http://schemas.google.com/spreadsheets/2006/cellsfeed"
+                    <link rel="http://schemas.google.com/spreadsheets/2006#cellsfeed"
                         type="application/atom+xml"
                         href="https://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full"/>
                     <link rel="self" type="application/atom+xml"
@@ -177,13 +268,30 @@ securitySchemes:
                   </entry>
                 </feed>
   post:
-    description: <<Add a Worksheet to a Spread sheet. The "key" value is the key of the spreadsheet. The Key is retreived from the "link" element that has rel="http://schemas.google.com/spreadsheets/2006/tablesfeed" in the apparopriate "entry" element from the GET spreadsheet list response. That element's href value provides the URL for that spreadsheet's worksheets feed.>>
+    description: <<Add a Worksheet to a Spread sheet. The "key" value is the key of the spreadsheet. The Key is retreived from the "link" element that has rel="http://schemas.google.com/spreadsheets/2006#tablesfeed" in the apparopriate "entry" element from the GET spreadsheet list response. That element's href value provides the URL for that spreadsheet's worksheets feed.>>
     body:
       application/atom+xml:
+        schema: |
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+            targetNamespace="http://www.w3.org/2005/Atom" xmlns:atom="http://www.w3.org/2005/Atom"
+            xmlns:gs="http://schemas.google.com/spreadsheets/2006" vc:minVersion="1.1"
+            xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning">
+            <xs:import namespace="http://schemas.google.com/spreadsheets/2006" schemaLocation="gs.xsd"/>
+            <xs:element name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="atom:title"/>
+                  <xs:element ref="gs:rowCount"/>
+                  <xs:element ref="gs:colCount"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="title" type="xs:NCName"/>
+          </xs:schema>
     responses:
       201:
         body:
-          application/atom+xml:
+          application/xml:
             example: |
                 <entry xmlns="http://www.w3.org/2005/Atom" xmlns:gs="http://schemas.google.com/spreadsheets/2006" xmlns:gd="http://schemas.google.com/g/2005" gd:etag=""IRxeEE0cCit7ImA."">
                   <id>
@@ -191,12 +299,12 @@ securitySchemes:
                   </id>
                   <updated>2015-01-16T04:29:02.539Z</updated>
                   <app:edited xmlns:app="http://www.w3.org/2007/app">2015-01-16T04:29:02.539Z</app:edited>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/worksheet" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#worksheet" />
                   <title>Expenses</title>
                   <content type="application/atom+xml;type=feed" src="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full" />
-                  <link rel="http://schemas.google.com/spreadsheets/2006/cellsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/cells/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full" />
-                  <link rel="http://schemas.google.com/visualization/2008/visualizationApi" type="application/atom+xml" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/gviz/tq?gid=2135548936" />
-                  <link rel="http://schemas.google.com/spreadsheets/2006/exportcsv" type="text/csv" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/export?gid=2135548936&format=csv" />
+                  <link rel="http://schemas.google.com/spreadsheets/2006#cellsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/cells/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full" />
+                  <link rel="http://schemas.google.com/visualization/2008#visualizationApi" type="application/atom+xml" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/gviz/tq?gid=2135548936" />
+                  <link rel="http://schemas.google.com/spreadsheets/2006#exportcsv" type="text/csv" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/export?gid=2135548936&format=csv" />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/private/full/ozbg8gi" />
                   <link rel="edit" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/private/full/ozbg8gi" />
                   <gs:colCount>10</gs:colCount>
@@ -251,7 +359,7 @@ securitySchemes:
     responses:
       201:
         body:
-          application/atom+xml:
+          application/xml:
             example: |
                 <entry xmlns="http://www.w3.org/2005/Atom" xmlns:gs="http://schemas.google.com/spreadsheets/2006" xmlns:gd="http://schemas.google.com/g/2005" gd:etag=""IRxeEE0cCit7ImA."">
                   <id>
@@ -259,12 +367,12 @@ securitySchemes:
                   </id>
                   <updated>2015-01-16T04:29:02.539Z</updated>
                   <app:edited xmlns:app="http://www.w3.org/2007/app">2015-01-16T04:29:02.539Z</app:edited>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/worksheet" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#worksheet" />
                   <title>Income</title>
                   <content type="application/atom+xml;type=feed" src="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full" />
-                  <link rel="http://schemas.google.com/spreadsheets/2006/cellsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/cells/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full" />
-                  <link rel="http://schemas.google.com/visualization/2008/visualizationApi" type="application/atom+xml" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/gviz/tq?gid=2135548936" />
-                  <link rel="http://schemas.google.com/spreadsheets/2006/exportcsv" type="text/csv" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/export?gid=2135548936&format=csv" />
+                  <link rel="http://schemas.google.com/spreadsheets/2006#cellsfeed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/cells/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full" />
+                  <link rel="http://schemas.google.com/visualization/2008#visualizationApi" type="application/atom+xml" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/gviz/tq?gid=2135548936" />
+                  <link rel="http://schemas.google.com/spreadsheets/2006#exportcsv" type="text/csv" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/export?gid=2135548936&format=csv" />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/private/full/ozbg8gi" />
                   <link rel="edit" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/worksheets/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/private/full/ozbg8gi" />
                   <gs:colCount>10</gs:colCount>
@@ -272,11 +380,57 @@ securitySchemes:
                 </entry>
   delete:
     description: <<Delete a worksheet in a Spreadsheet. The URL to use is the value of the href attribute of the link element that has the attribute of rel="edit" from the get worksheet call>>
-    responses:
-      200:
-        body:
-          application/atom+xml:
-
+  /{worksheetid}:
+    get:
+      description: <<request a worksheet in a given spreadsheet, issue a GET request to that URL, with an appropriate authorization header. The Key is retreived from the "link" element that has rel="http://schemas.google.com/spreadsheets/2006#tablesfeed" in the apparopriate "entry" element from the GET spreadsheet list response. That element's href value provides the URL for that spreadsheet's worksheets feed. >>
+      responses:
+        200:
+          body:
+            application/xml:
+              example: |
+                  <feed xmlns="http://www.w3.org/2005/Atom"
+                    xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/"
+                    xmlns:gs="http://schemas.google.com/spreadsheets/2006"
+                    xmlns:gd="http://schemas.google.com/g/2005"
+                    gd:etag='W/"D0cERnk-eip7ImA9WBBXGEg."'>
+                    <id>https://spreadsheets.google.com/feeds/worksheets/key/private/full</id>
+                    <updated>2006-11-17T18:23:45.173Z</updated>
+                    <title type="text">Groceries R Us</title>
+                    <link rel="alternate" type="text/html"
+                        href="https://spreadsheets.google.com/ccc?key=key"/>
+                    <link rel="http://schemas.google.com/g/2005#feed"
+                        type="application/atom+xml"
+                        href="https://spreadsheets.google.com/feeds/worksheets/key/private/full"/>
+                    <link rel="self" type="application/atom+xml"
+                        href="https://spreadsheets.google.com/feeds/worksheets/key/private/full"/>
+                    <link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml"
+                        href="https://spreadsheets.google.com/feeds/worksheets/key/private/full"/>
+                    <author>
+                      <name>Fitzwilliam Darcy</name>
+                      <email>fitz@gmail.com</email>
+                    </author>
+                    <openSearch:totalResults>1</openSearch:totalResults>
+                    <openSearch:startIndex>1</openSearch:startIndex>
+                    <openSearch:itemsPerPage>1</openSearch:itemsPerPage>
+                    <entry gd:etag='"YDwqeyI."'>
+                      <id>https://spreadsheets.google.com/feeds/worksheets/key/private/full/worksheetId</id>
+                      <updated>2006-11-17T18:23:45.173Z</updated>
+                      <title type="text">Sheet1</title>
+                      <content type="text">Sheet1</content>
+                      <link rel="http://schemas.google.com/spreadsheets/2006#listfeed"
+                          type="application/atom+xml"
+                          href="https://spreadsheets.google.com/feeds/list/key/worksheetId/private/full"/>
+                      <link rel="http://schemas.google.com/spreadsheets/2006#cellsfeed"
+                          type="application/atom+xml"
+                          href="https://spreadsheets.google.com/feeds/cells/key/worksheetId/private/full"/>
+                      <link rel="self" type="application/atom+xml"
+                          href="https://spreadsheets.google.com/feeds/worksheets/key/private/full/worksheetId"/>
+                      <link rel="edit" type="application/atom+xml"
+                          href="https://spreadsheets.google.com/feeds/worksheets/key/private/full/worksheetId/version"/>
+                      <gs:rowCount>100</gs:rowCount>
+                      <gs:colCount>20</gs:colCount>
+                    </entry>
+                  </feed>
 /list/{key}/{worksheetId}/{visibility}/{protection}:
   get:
     description: <<Get the list of Rows in the worksheet. The list feed contains all rows after the first row up to the first blank row.>>
@@ -297,18 +451,18 @@ securitySchemes:
     responses:
       200:
         body:
-          application/atom+xml:
+          application/xml:
             example: |
                 <feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended" xmlns:gd="http://schemas.google.com/g/2005" gd:etag="W/"DU4HR38ycSt7ImA9XRRSFUg."">
                   <id>
                   https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/od6/private/full
                   </id>
                   <updated>2015-01-18T05:12:16.199Z</updated>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/ist" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#list" />
                   <title>Hello World</title>
                   <link rel="alternate" type="application/atom+xml" href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/edit" />
-                  <link rel="http://schemas.google.com/g/2005/feed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/od6/private/full" />
-                  <link rel="http://schemas.google.com/g/2005/post" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/od6/private/full" />
+                  <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/od6/private/full" />
+                  <link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/od6/private/full" />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/od6/private/full" />
                   <author>
                   <name>paulpog</name>
@@ -320,7 +474,7 @@ securitySchemes:
                   <id>https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/od6/cokwr</id>
                   <updated>2015-01-18T05:12:16.199Z</updated>
                   <app:edited xmlns:app="http://www.w3.org/2007/app">2015-01-18T05:12:16.199Z</app:edited>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/list" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#list" />
                   <title>Hello World</title>
                   <content />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/od6/private/full/cokwr" />
@@ -329,13 +483,23 @@ securitySchemes:
                   </entry>
                 </feed>
   post:
-    description: <<Adding rows to a worksheet via the list feed involves specifying values for each column in the worksheet, and sending this row representation to the API. Then determine the appropriate URL to send the entry to, known as the POST URL. You can find the POST URL in the list feed's link element that has rel="http://schemas.google.com/g/2005/post".>>
+    description: <<Adding rows to a worksheet via the list feed involves specifying values for each column in the worksheet, and sending this row representation to the API. Then determine the appropriate URL to send the entry to, known as the POST URL. You can find the POST URL in the list feed's link element that has rel="http://schemas.google.com/g/2005#post".>>
     body:
       application/atom+xml:
-    responses:
-      200:
-        body:
-          application/atom+xml:
+        schema: |
+          <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.w3.org/2005/Atom" xmlns:gsx="http://schemas.google.com/spreadsheets/2006/extended" xmlns:atom="http://www.w3.org/2005/Atom">
+            <xs:import namespace="http://schemas.google.com/spreadsheets/2006/extended" schemaLocation="gsx.xsd"/>
+            <xs:element name="entry">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="gsx:hours"/>
+                  <xs:element ref="gsx:ipm"/>
+                  <xs:element ref="gsx:items"/>
+                  <xs:element ref="gsx:name"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:schema>
   put:
     description: <<modify a row in the worksheet>>
     body:
@@ -407,7 +571,7 @@ securitySchemes:
                   </id>
                   <updated>2015-01-19T00:48:02.719Z</updated>
                   <app:edited xmlns:app="http://www.w3.org/2007/app">2015-01-19T00:48:02.719Z</app:edited>
-                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006/list" />
+                  <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#list" />
                   <title>Hello WOrld</title>
                   <content />
                   <link rel="self" type="application/atom+xml" href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full/cokwr" />
@@ -418,8 +582,6 @@ securitySchemes:
     description: <<To delete a row, first retrieve the row to delete, then send a DELETE request to the row's edit URL. This is the same URL used to update the row.>>
     responses:
       200:
-        body:
-          application/atom+xml:
       
 /cells/{key}/{worksheetId}/{visibility}/{protection}:
   description:  In a cell feed, each entry represents a single cell. Cells are referred to by position.
@@ -432,7 +594,7 @@ securitySchemes:
                    The numericValue attribute of a cell entry, when present, indicates that the cell was determined to have a numeric value, and its numeric value is indicated with this attributed.
                    The literal value of the cell element is the calculated value of the cell, without formatting applied. If the cell contains a formula, the calculated value is given here. The Sheets API has no concept of formatting, and thus cannot manipulate formatting of cells.
   get:
-    description: <<get a cell. To determine the URL of a cell feed for a given worksheet, get the worksheets feed and examine the link element in which rel is http://schemas.google.com/spreadsheets/2006/cellsfeed. The href value in that element is the cell feed's URI.>>
+    description: <<get a cell. To determine the URL of a cell feed for a given worksheet, get the worksheets feed and examine the link element in which rel is http://schemas.google.com/spreadsheets/2006#cellsfeed. The href value in that element is the cell feed's URI.>>
     queryParameters:
       min-row:
         type: string
@@ -457,13 +619,13 @@ securitySchemes:
                 <id>https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full</id>
                 <updated>2015-01-19T01:34:22.631Z</updated>
                 <category scheme="http://schemas.google.com/spreadsheets/2006"
-                    term="http://schemas.google.com/spreadsheets/2006/list"/>
+                    term="http://schemas.google.com/spreadsheets/2006#list"/>
                 <title>Expenses</title>
                 <link rel="alternate" type="application/atom+xml"
                     href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/edit"/>
-                <link rel="http://schemas.google.com/g/2005/feed" type="application/atom+xml"
+                <link rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml"
                     href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full"/>
-                <link rel="http://schemas.google.com/g/2005/post" type="application/atom+xml"
+                <link rel="http://schemas.google.com/g/2005#post" type="application/atom+xml"
                     href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full"/>
                 <link rel="self" type="application/atom+xml"
                     href="https://spreadsheets.google.com/feeds/list/1XCaYpVdLm-XGnvaVeL9VtN9ywA7Ewr_3RL1t5TvOeFo/ozbg8gi/private/full"/>
@@ -478,7 +640,7 @@ securitySchemes:
                     <updated>2015-01-19T01:34:22.631Z</updated>
                     <app:edited xmlns:app="http://www.w3.org/2007/app">2015-01-19T01:34:22.631Z</app:edited>
                     <category scheme="http://schemas.google.com/spreadsheets/2006"
-                        term="http://schemas.google.com/spreadsheets/2006/list"/>
+                        term="http://schemas.google.com/spreadsheets/2006#list"/>
                     <title>Hello World</title>
                     <content/>
                     <link rel="self" type="application/atom+xml"
@@ -488,11 +650,8 @@ securitySchemes:
                     <gsx:helloworld>Hello World</gsx:helloworld>
                 </entry>
               </feed>
-
-/cells/{key}/{worksheetId}/{visibility}/{protection}/{cell}:
-  description:  insert or update a cell
   put:
-    description: <<Use HTTP PUT to change the data in a cell, even if it is empty; the use of POST on empty cells is no longer recommended. To clear a cell, send an entry with an empty content element in your PUT request instead of using DELETE.>>
+    description: <<Cells can be modified in place. Unlike other feeds, cells are not directly added nor deleted. They are fixed in place, based on the dimensions of a given worksheet. To add or remove cells from a worksheet, use the worksheets feed to change the dimension of the worksheet. To empty a cell, simply update its value to be an empty string. Use HTTP PUT to change the data in a cell, even if it is empty; the use of POST on empty cells is no longer recommended. To clear a cell, send an entry with an empty content element in your PUT request instead of using DELETE.>>
     body:
       application/atom+xml:
         schema: |
@@ -527,7 +686,7 @@ securitySchemes:
                 <updated>2015-01-19T01:34:22.631Z</updated>
                 <app:edited xmlns:app="http://www.w3.org/2007/app">2015-01-19T01:34:22.631Z</app:edited>
                 <category scheme="http://schemas.google.com/spreadsheets/2006"
-                    term="http://schemas.google.com/spreadsheets/2006/list"/>
+                    term="http://schemas.google.com/spreadsheets/2006#list"/>
                 <title>Hello W0rld</title>
                 <content/>
                 <link rel="self" type="application/atom+xml"
@@ -578,7 +737,98 @@ securitySchemes:
                 </xs:complexType>
               </xs:element>
             </xs:schema>
-      responses:
-        200:
-          body:
-            application/atom+xml:
+/files:
+  post:
+      description: <<Insert a new file. Subsequent GET requests include the read-only fileExtension property populated with the extension originally specified in the title property. When a Google Drive user requests to download a file, or when the file is downloaded through the sync client, Drive builds a full filename (with extension) based on the title. In cases where the extension is missing, Google Drive attempts to determine the extension based on the file's MIME type.
+       Authorization 
+        This request requires authorization with at least one of the following scopes (read more about authentication and authorization).
+        Scope:- |
+        https://www.googleapis.com/auth/drive
+        https://www.googleapis.com/auth/drive.file
+        https://www.googleapis.com/auth/drive.appdata
+        https://www.googleapis.com/auth/drive.apps.readonly
+        
+        Body:-
+        supply a Files resource with the following properties as the metadata. For more information, see the document on https://developers.google.com/drive/manage-uploads
+          description:- string,  A short description of the file.
+          folderColorRgb:- string,  Folder color as an RGB hex string if the file is a folder. The list of supported colors is available in the folderColorPalette field of the About resource. If an unsupported color is specified, it will be changed to the closest color in the palette.
+          indexableText.text:- string, The text to be indexed for this file.
+          labels.hidden:- boolean, Deprecated.
+          labels.restricted:- boolean, Whether viewers are prevented from downloading this file.
+          labels.starred:- boolean, Whether this file is starred by the user.
+          labels.trashed:- boolean, Whether this file has been trashed.
+          labels.viewed:- boolean, Whether this file has been viewed by this user.
+          lastViewedByMeDate:-datetime, Last time this file was viewed by the user (formatted RFC 3339 timestamp).
+          markedViewedByMeDate:- datetime, Time this file was explicitly marked viewed by the user (formatted RFC 3339 timestamp).
+          mimeType:- string, The MIME type of the file. This is only mutable on update when uploading new content. This field can be left blank, and the mimetype will be determined from the uploaded content's MIME type.
+          modifiedDate:- datetime, Last time this file was modified by anyone (formatted RFC 3339 timestamp). This is only mutable on update when the setModifiedDate parameter is set.
+          parents[]:- list, Collection of parent folders which contain this file.
+          Setting this field will put the file in all of the provided folders. On insert, if no folders are provided, the file will be placed in the default root folder.
+          properties[]:- list, The list of properties.
+          title:- string, The title of the file. Used to identify file or folder name.
+          writersCanShare:- boolean, Whether writers can share the document with other users.
+          >>
+      queryParameters: 
+        "uploadType": 
+          description: The type of upload request to the /upload URI. Acceptable values are:- |
+            media - Simple upload. Upload the media only, without any metadata.
+            multipart - Multipart upload. Upload both the media and its metadata, in a single request.
+            resumable - Resumable upload. Upload the file in a resumable fashion, using a series of at least two requests where the first request includes the metadata.
+          type: string
+          required: true
+        "convert": 
+          description: Whether to convert this file to the corresponding Google Docs format. (Default:- false)
+          type: boolean
+          required: false
+        "ocr": 
+          description: Whether to attempt OCR on .jpg, .png, .gif, or .pdf uploads. (Default:- false)
+          type: boolean
+          required: false
+        "ocrLanguage": 
+          description: If ocr is true, hints at the language to use. Valid values are ISO 639-1 codes.
+          type: string
+          required: false
+        "pinned": 
+          description: Whether to pin the head revision of the uploaded file. A file can have a maximum of 200 pinned revisions. (Default:- false)
+          type: boolean
+          required: false
+        "timedTextLanguage": 
+          description: The language of the timed text.
+          type: string
+          required: false
+        "timedTextTrackName": 
+          description: The timed text track name.
+          type: string
+          required: false
+        "useContentAsIndexableText": 
+          description: Whether to use the content as indexable text. (Default:- false)
+          type: boolean
+          required: false
+        "visibility": 
+          description: The visibility of the new file. This parameter is only relevant when convert=false. | 
+            Acceptable values are:-
+              "DEFAULT":- The visibility of the new file is determined by the user's default visibility/sharing policies. (default)
+              "PRIVATE":- The new file will be visible to only the owner.
+          type: string
+          required: false
+      headers:
+        Authorization:
+          description: The request Token issued via OAuth 2.0
+          required: true
+        Content-Type:
+          description: if uploadType=media then Set to one of the method's accepted upload media data types, specified in https://developers.google.com/drive/v2/reference. If uploadType=multipart then Set to multipart/related and include the boundary string you're using to identify the parts of the request.
+          required: false
+        Content-Length:
+          description: if uploadType=media thenSet to the number of bytes you are uploading. Not required if you are using chunked transfer encoding. If uploadType=multipart then Set to the total number of bytes in the request body. The media portion of the request must be less than the maximum file size specified for this method. If uploadType=resumable then Set to the number of bytes provided in the body of this initial request. Not required if you are using chunked transfer encoding.
+          required: false
+        X-Upload-Content-Type:
+          description: Only required for uploadType=resumable. Set to the media MIME type of the upload data to be transferred in subsequent requests.
+          required: false
+        X-Upload-Content-Length:
+          description: Only required for uploadType=resumable. Set to the number of bytes of upload data to be transferred in subsequent requests.  If the length is unknown at the time of this request, you can omit this header.
+          required: false
+      responses: 
+        "200": 
+          body: 
+            "application/json": 
+              schema: "file" 

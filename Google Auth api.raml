@@ -1,0 +1,18 @@
+#%RAML 0.8
+title: Google Auth API
+version: 1.0
+baseUri: https://www.googleapis.com/oauth2/v3
+/token:
+  post:
+    description: <<request access token>>
+    body:
+      application/x-www-form-urlencoded:
+        formParameters:
+          grant_type:
+            description: |
+              Use the following string, URL-encoded as necessary: urn:ietf:params:oauth:grant-type:jwt-bearer
+            type: string
+          assertion:
+            description: |
+              The JWT, including signature.
+            type: string

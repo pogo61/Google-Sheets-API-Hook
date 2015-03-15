@@ -8,6 +8,20 @@ Link to product documentation and product overview page
 - API Documentation: [Google Sheets API docs] (https://developers.google.com/google-apps/spreadsheets/)
 
 ### Pre-Reqs
+- you must install the pso extensions custom polices:
+    + unzip the com.soa.pso.policy.restmsg_7.1.3.jar into the <Policy Manager Home>/sm70 directory. This will result in files placed in the sm70/lib/pso.opeapi.extensions_7.2.2 subdirectory
+    + restart both PM and ND(s)
+    + Using the SOA Admin Console, install the following features in each PM container:
+        * SOA Professional Services OpenAPI Extensions
+        * SOA Professional Services OpenAPI Extensions UI
+    + Using the SOA Admin Console, install the following features in each ND container:
+        * SOA Professional Services OpenAPI Extensions
+- you must install the com.soa.pso.policy.JWTToken_1.0.0.zip nto the <Policy Manager Home>/sm70 directory. This will result in files placed in the sm70/lib/pso.policy.JWTToken_1.0.0 subdirectory
+    + restart ND(s) only
+    +  Using the SOA Admin Console, on each ND:
+        * select the Insert JWT as HTTP Header Policy Handler feature  
+        * press the "install" button
+        * follow the install wizard instructions and restart the ND
 - This will only work for [Google Apps for work] (https://www.google.com/intx/en_au/work/apps/business/?utm_source=google&utm_medium=cpc&utm_campaign=japac-smb-apps-bkws-au-en&utm_content=gafb&utm_term=google%20apps&gclid=CPGWm82o5cMCFU06vAod9kcAOA&gclsrc=ds). You, or your organisation, must have a subscription to this service. The reason for this is that this is the only service that Google provides 2-legged OAuth to (via a service account). Google uses only 3-legged OAuth with its free and open Google Docs. 3-legged OAuth is unsuitable to server to server integration.
 - Register the application in the [Google Developers Console] (https://console.developers.google.com/). Creating an account if you have not already registered.
 - once the App is defined, double click on it to be taken the the App details page. 

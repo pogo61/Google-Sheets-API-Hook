@@ -9,7 +9,7 @@ Link to product documentation and product overview page
 
 ### Pre-Reqs
 - you must install the pso extensions custom polices:
-    + unzip the com.soa.pso.policy.restmsg_7.1.3.jar into the <Policy Manager Home>/sm70 directory. This will result in files placed in the sm70/lib/pso.opeapi.extensions_7.2.2 subdirectory
+    + unzip the com.soa.pso.openapi.extensions_7.2.2.zip (available in this repository) into the <Policy Manager Home>/sm70 directory. This will result in files placed in the sm70/lib/pso.opeapi.extensions_7.2.2 subdirectory
     + restart both PM and ND(s)
     + Using the SOA Admin Console, install the following features in each PM container:
         * SOA Professional Services OpenAPI Extensions
@@ -24,7 +24,7 @@ Link to product documentation and product overview page
         * follow the install wizard instructions and restart the ND
 - This will only work for [Google Apps for work] (https://www.google.com/intx/en_au/work/apps/business/?utm_source=google&utm_medium=cpc&utm_campaign=japac-smb-apps-bkws-au-en&utm_content=gafb&utm_term=google%20apps&gclid=CPGWm82o5cMCFU06vAod9kcAOA&gclsrc=ds). You, or your organisation, must have a subscription to this service. The reason for this is that this is the only service that Google provides 2-legged OAuth to (via a service account). Google uses only 3-legged OAuth with its free and open Google Docs. 3-legged OAuth is unsuitable to server to server integration.
 - Register the application in the [Google Developers Console] (https://console.developers.google.com/). Creating an account if you have not already registered.
-- once the App is defined, double click on it to be taken the the App details page. 
+- once the Project is defined, double click on it to be taken the the Project details page. 
 - Click on the "Credentials" left hand menu item
 - When the Credentials Portlet is displaid, click on the "Create new Client ID" button. then select the "Service Acccount" for the CLient ID type. (note: you must be the Google Apps sdministrator to do this).
 - once this is done you should have a new section in the Credentials Portlet for the Service Account.
@@ -43,7 +43,7 @@ https://spreadsheets.google.com/feeds,https://www.googleapis.com/auth/drive,http
   - make sure select the migrations.properties file 
   - click Okay to start the importation of the hook.
 - this will create a Google Sheets API Hook Organisation with the requisite artefacts needed to run the API.
-- you can us the API as is calling http://"URL of the Listener of your ND"/sheets_hook, or you can create an API in CM and expost it.
+- you can use the API as is calling http://"URL of the Listener of your ND"/sheets_hook, or you can create an API in CM and expost it.
     - if you chose to create an API in CM, you must create a Service in your CM tenant which is a Virtual Service of the Google_Sheets_API VS that was created by the import. Then Go to CM and create a API from an existing Service.
 
 #### Verify Import
@@ -56,17 +56,45 @@ https://spreadsheets.google.com/feeds,https://www.googleapis.com/auth/drive,http
 
 #### Configure Security
 - Go to Google Sheets API Hook -> Policies -> Operational Policies ->    Insert JWT into Downstream request policy
-- Click "modify" in the XML Policy Tab. An XML Policy Content editor dialog will be displayed.
-- change the value of the tns:fileLocation element to be the location and name of the file containing the private key of the Service account (this is obtain by exporting the key for the App in the [Google Developers Console] (https://console.developers.google.com/)). Note that the location must be absolute, not relative.
-- change the value of the tns:serviceAccountEmail element to be the email address of the Service account (this is obtain by exporting the key for the App in the [Google Developers Console] (https://console.developers.google.com/)).
-- change the value of the tns:userAccountEmail element to be the email address of the person who's spreadsheets the API is going to use (this must be a user in the Google Apps for work domain that the administrator has created).
-- save the changes
-- click on the "Activate Policy" workflow activity in the righ-hand Activities portlet
-- ensure that the status changes to "State: Active"
+    - Click "modify" in the XML Policy Tab. An XML Policy Content editor dialog will be displayed.
+    - change the value of the tns:fileLocation element to be the location and name of the file containing the private key of the Service account (this is obtain by exporting the key for the App in the [Google Developers Console] (https://console.developers.google.com/)). Note that the location must be absolute, not relative.
+    - change the value of the tns:serviceAccountEmail element to be the email address of the Service account (this is obtain by exporting the key for the App in the [Google Developers Console] (https://console.developers.google.com/)).
+    - change the value of the tns:userAccountEmail element to be the email address of the person who's spreadsheets the API is going to use (this must be a user in the Google Apps for work domain that the administrator has created).
+    - save the changes
+    - click on the "Activate Policy" workflow activity in the righ-hand Activities portlet
+    - ensure that the status changes to "State: Active"
+- Go to Google Sheets API Hook -> Policies -> Operational Policies ->    GetAuthToken policy
+    - click on the "Activate Policy" workflow activity in the righ-hand Activities portlet
+    - ensure that the status changes to "State: Active"
 
 #### Verify Connectivity
-- Using curl http://"URL of the Listener of your ND"/sheets_hook/<what ever operation you want>
--  the response should be that expected for the operation. Note, there is no need to do any OAuth actions, as the Hook looks after that.
+- Using curl http://"URL of the Listener of your ND"/sheets_hook/helloworld
+-  the response should be similar to the below, listing your spreadsheets:
+    <feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/">
+        <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full</id>
+        <updated>2015-03-17T02:16:48.634Z</updated>
+        <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet"/>
+        <title type="text">Available Spreadsheets - paulpog@japarasolutions.com</title>
+        <link href="http://docs.google.com" rel="alternate" type="text/html"/>
+        <link href="https://spreadsheets.google.com/feeds/spreadsheets/private/full" rel="http://schemas.google.com/g/2005#feed" type="application/atom+xml"/>
+        <link href="https://spreadsheets.google.com/feeds/spreadsheets/private/full" rel="self" type="application/atom+xml"/>
+        <openSearch:totalResults>5</openSearch:totalResults>
+        <openSearch:startIndex>1</openSearch:startIndex>
+        <entry>
+            <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full/1Eqwv5WFMhCAomR5rT4ciklXpX4w7PvVpeCm7eRmgQDY</id>
+            <updated>2015-03-12T10:03:26.506Z</updated>
+            <category scheme="http://schemas.google.com/spreadsheets/2006" term="http://schemas.google.com/spreadsheets/2006#spreadsheet"/>
+            <title type="text">Test</title>
+            <content type="text">Test</content>
+            <link href="https://spreadsheets.google.com/feeds/worksheets/1Eqwv5WFMhCAomR5rT4ciklXpX4w7PvVpeCm7eRmgQDY/private/full" rel="http://schemas.google.com/spreadsheets/2006#worksheetsfeed" type="application/atom+xml"/>
+            <link href="https://docs.google.com/a/japarasolutions.com/spreadsheets/d/1Eqwv5WFMhCAomR5rT4ciklXpX4w7PvVpeCm7eRmgQDY/edit" rel="alternate" type="text/html"/>
+            <link href="https://spreadsheets.google.com/feeds/spreadsheets/private/full/1Eqwv5WFMhCAomR5rT4ciklXpX4w7PvVpeCm7eRmgQDY" rel="self" type="application/atom+xml"/>
+            <author>
+                <name>paulpog</name>
+                <email>paulpog@japarasolutions.com</email>
+            </author>
+        </entry>
+    </feed>
 
 ### Modify and Build
 In the event you need to change the API Hook.   Here are the instructions to do so. 

@@ -107,13 +107,13 @@ Virtual Services also have the ability to have Custom Process and Scripts run be
 
 #### Hello World
 To create the helloworld operation in the Google_Sheets_API_Hook VS (Virtual Service) the Google Sheets API RAML was copied and the following was added to the copied RAML to create the Google Sheets API Hook RAML:
-    `/helloworld:
-      get:
-        description: <<returns all spreadsheets on your google drive>>
-        responses:
-          200:
-            body:
-              application/atom+xml:`
+    `/helloworld:`
+      `get:`
+        `description: <<returns all spreadsheets on your google drive>>`
+        `responses:`
+          `200:`
+            `body:`
+              `application/atom+xml:`
 
 Then a VS was created by using the RAML as the definition source.
 Then all the Operations in the VS were mapped to the same operations in the Google Sheets API PS (Physical Service), except the "helloworld" operation, which is mapped to the GET /spreadsheets/{visibility}/{protection} operation.

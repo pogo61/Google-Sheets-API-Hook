@@ -106,7 +106,25 @@ Apart from offering a different interface to the Physical Service, a Virtual Ser
 Virtual Services also have the ability to have Custom Process and Scripts run before the Physical Service is called. Here is where a lot of the magic of Integration occurs.
 
 #### Hello World
+To create the helloworld operation in the Google_Sheets_API_Hook VS (Virtual Service) the Google Sheets API RAML was copied and the following was added to the copied RAML to create the Google Sheets API Hook RAML:
+```/helloworld:
+      get:
+        description: <<returns all spreadsheets on your google drive>>
+        responses:
+          200:
+            body:
+              application/atom+xml:```
 
+Then a VS was created by using the RAML as the definition source.
+Then all the Operations in the VS were mapped to the same operations in the Google Sheets API PS (Physical Service), except the "helloworld" operation, which is mapped to the GET /spreadsheets/{visibility}/{protection} operation.
+
+However, you can see that the "/helloworld" operation has no parameters, but the "GET /spreadsheets/{visibility}/{protection}" operation needs a value for the {visibility} and {protection} URI parameters. Therefore we need to run a script to set up the request message to add these values before calling the operation.
+
+Go to the Google_Sheets_API_Hook VS -> Operations Tab -> GET /hellowworld operation -> Process tab you'll see this image:
+![Helloworld process] 
+(https://github.com/pogo61/Google-Sheets-API-Hook/blob/master/Hello%20World%20Process.png)
+
+Double click on the Script activity and the invoke activity to see how these work to make the Hello World operation call successful.
 
 
 ### Create Your Own Integration with the Google Sheets API

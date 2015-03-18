@@ -106,10 +106,10 @@ Apart from offering a different interface to the Physical Service, a Virtual Ser
 Virtual Services also have the ability to have Custom Process and Scripts run before the Physical Service is called. Here is where a lot of the magic of Integration occurs.
 
 #### Hello World
-To create the helloworld operation in the Google_Sheets_API_Hook VS (Virtual Service) the Google Sheets API RAML was copied and the following was added to the copied RAML to create the Google Sheets API Hook RAML:
+To create the helloworld operation in the Google_Sheets_API_Hook VS (Virtual Service) the Google Sheets API RAML was copied and the following was added to the copied RAML to create the Google Sheets API Hook RAML:  
     /helloworld:  
       &nbsp;get:  
-        &nbsp;&nbsp;description: <<returns all spreadsheets on your google drive>>  
+        &nbsp;&nbsp;description: <returns all spreadsheets on your google drive>  
         &nbsp;&nbsp;&nbsp;responses:  
           &nbsp;&nbsp;&nbsp;&nbsp;200:  
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body:  

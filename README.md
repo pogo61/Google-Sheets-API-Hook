@@ -1,6 +1,8 @@
-# SOA Software API HOOK
-Put a nice company logo image here. 
-Link to product documentation and product overview page
+# Akana API HOOK
+![Image of Akana] 
+(https://www.akana.com/img/formerlyLOGO8.png) 
+[Akana.com](http://akana.com)
+
 ## Google Sheets API 
 ### About the API
 - CRUD spreadsheets on Google Drive
@@ -95,6 +97,11 @@ https://spreadsheets.google.com/feeds,https://www.googleapis.com/auth/drive,http
             </author>
         </entry>
     </feed>
+
+### Create Your Own Integration with the Google Sheets API
+The Hello World operation is one simple way of integrating or extending your API's.
+Take a look at the [Google Sheets API Integration](https://github.com/pogo61/Google-Sheets-API-Integration "Google Sheets API Integration").
+this will give you a deeper inderstanding of the richness of our gateway product in integrating to API's    
 
 ### Modify and Build
 In the event you need to change the API Hook.   Here are the instructions to do so. 

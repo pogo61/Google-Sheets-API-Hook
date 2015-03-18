@@ -72,7 +72,7 @@ https://spreadsheets.google.com/feeds,https://www.googleapis.com/auth/drive,http
 
 #### Verify Connectivity
 - Using curl http://"URL of the Listener of your ND"/sheets_hook/helloworld
--  the response should be similar to the below, listing your spreadsheets:
+-  the response should be similar to the below, listing your spreadsheets:  
     ```<feed xmlns="http://www.w3.org/2005/Atom" xmlns:openSearch="http://a9.com/-/spec/opensearchrss/1.0/">
         <id>https://spreadsheets.google.com/feeds/spreadsheets/private/full</id>
         <updated>2015-03-17T02:16:48.634Z</updated>

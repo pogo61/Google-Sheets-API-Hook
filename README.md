@@ -101,12 +101,12 @@ https://spreadsheets.google.com/feeds,https://www.googleapis.com/auth/drive,http
 
 ### How Hello World Works
 #### An Akana Integration Primer
-The Google_Sheets_API_Hook API is a "Virtual Service". That is, its interface is not that of a real service implementation. It can be a proxy to a "real" implementation, or it can be an aggregate (a combination) of a number of "real" implementations. In Policy Manager a "real" implementation is called a "Physical Service".
+The Trello_API_Hook API is a "Virtual Service". That is, its interface is not that of a real service implementation. It can be a proxy to a "real" implementation, or it can be an aggregate (a combination) of a number of "real" implementations. In Policy Manager a "real" implementation is called a "Physical Service".
 Apart from offering a different interface to the Physical Service, a Virtual Service offers the ability to attach Policies for security, logging, QoS, and a number of other non-functional capabilities.
 Virtual Services also have the ability to have Custom Process and Scripts run before the Physical Service is called. Here is where a lot of the magic of Integration occurs.
 
 #### Hello World
-To create the helloworld operation in the Google_Sheets_API_Hook VS (Virtual Service) the Google Sheets API RAML was copied and the following was added to the copied RAML to create the Google Sheets API Hook RAML:  
+To create the helloworld operation in the Trello_API_Hook VS (Virtual Service) the Google Sheets API RAML was copied and the following was added to the copied RAML to create the Google Sheets API Hook RAML:  
     /helloworld:  
       &nbsp;get:  
         &nbsp;&nbsp;description: "returns all spreadsheets on your google drive"  
